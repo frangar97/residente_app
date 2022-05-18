@@ -47,7 +47,8 @@ class _LoginFormState extends State<LoginForm> {
         }
 
         if (formStatus is SubmissionSuccess) {
-          _showSnackBar(context, "Sesión iniciada con exito");
+          Navigator.pushNamedAndRemoveUntil(
+              context, "admin_home", (route) => false);
         }
       },
       builder: (context, state) {
@@ -76,7 +77,9 @@ class _LoginFormState extends State<LoginForm> {
               const SizedBox(height: 20),
               DefaultButton(
                   child: (state.formStatus is FormSubmitting)
-                      ? const CircularProgressIndicator(color: Colors.white,)
+                      ? const CircularProgressIndicator(
+                          color: Colors.white,
+                        )
                       : const Text(
                           "Iniciar Sesión",
                           style: TextStyle(
