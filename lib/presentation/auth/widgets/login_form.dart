@@ -65,7 +65,7 @@ class _LoginFormState extends State<LoginForm> {
                   const Spacer(),
                   GestureDetector(
                     onTap: () =>
-                        {Navigator.pushNamed(context, "forgot_password")},
+                        {Navigator.pushNamed(context, "auth_forgot_password")},
                     child: const Text(
                       "Olvide mi contraseña",
                       style: TextStyle(decoration: TextDecoration.underline),

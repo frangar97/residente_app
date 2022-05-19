@@ -18,11 +18,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return StateProvider(
       child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: kAppTitle,
-        initialRoute: "login",
-        routes: getAplicationRoutes()
-      ),
+          debugShowCheckedModeBanner: false,
+          title: kAppTitle,
+          initialRoute: "auth_login",
+          routes: getAplicationRoutes()),
     );
   }
 }
