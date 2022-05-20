@@ -13,16 +13,20 @@ class _CreateUserBodyState extends State<CreateUserBody> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
+      resizeToAvoidBottomInset: true,
       backgroundColor: Colors.grey.shade200,
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(60.0), // here the desired height
         child: _buildAppBar(),
       ),
-      body: Column(
-        children: <Widget>[
-          const CreateUserForms(),
-          _buildCreateButton(),
+      body: ListView(
+        children: [
+          Column(
+            children: <Widget>[
+              const CreateUserForms(),
+              _buildCreateButton(),
+            ],
+          ),
         ],
       ),
       // body: _buildBody(),

@@ -50,41 +50,43 @@ class _InfoPaymentBodyState extends State<InfoPaymentBody> {
   }
 
   Widget _buildBody() {
-    return Column(
-      children: <Widget>[
-        const SizedBox(
-          height: 30,
-        ),
-        RichText(
-          text: const TextSpan(
-            text: 'Cuota',
-            style: subtitle2Style,
-            children: <TextSpan>[
-              TextSpan(
-                text: ' Agosto 2022',
-                style: subtitleStyle,
-              )
-            ],
+    return ListView(children: [
+      Column(
+        children: <Widget>[
+          const SizedBox(
+            height: 30,
           ),
-        ),
-        const SizedBox(height: 30),
-        _buildPaymentInfoItem(),
-        const SizedBox(height: 30),
-        _buildAttachedFile(),
-        const SizedBox(height: 20),
-        const Divider(
-          color: Colors.black,
-          height: 30,
-          endIndent: 130,
-          indent: 130,
-          thickness: 1,
-        ),
-        const SizedBox(height: 20),
-        _buildNoteFormField(),
-        const SizedBox(height: 20),
-        _buildAprovedRejectButtons()
-      ],
-    );
+          RichText(
+            text: const TextSpan(
+              text: 'Cuota',
+              style: subtitle2Style,
+              children: <TextSpan>[
+                TextSpan(
+                  text: ' Agosto 2022',
+                  style: subtitleStyle,
+                )
+              ],
+            ),
+          ),
+          const SizedBox(height: 30),
+          _buildPaymentInfoItem(),
+          const SizedBox(height: 30),
+          _buildAttachedFile(),
+          const SizedBox(height: 20),
+          const Divider(
+            color: Colors.black,
+            height: 30,
+            endIndent: 130,
+            indent: 130,
+            thickness: 1,
+          ),
+          const SizedBox(height: 20),
+          _buildNoteFormField(),
+          const SizedBox(height: 20),
+          _buildAprovedRejectButtons()
+        ],
+      ),
+    ]);
   }
 
   Widget _buildPaymentInfoItem() {

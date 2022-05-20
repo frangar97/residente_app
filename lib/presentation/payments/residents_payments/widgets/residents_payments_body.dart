@@ -42,7 +42,9 @@ class _ResidentsPaymentsBodyState extends State<ResidentsPaymentsBody> {
             size: 25,
           ),
           tooltip: 'Atras',
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pop(context);
+          },
         ),
       ),
     );

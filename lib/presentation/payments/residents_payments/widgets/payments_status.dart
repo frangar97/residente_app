@@ -42,7 +42,7 @@ class _PaymentsStatusState extends State<PaymentsStatus> {
   Widget _buildPaymentItem() {
     return GestureDetector(
       onTap: () {
-        Navigator.pushNamed(context, "info_payment");
+        Navigator.pushNamed(context, "payments_resident_info");
       },
       child: Container(
         decoration: BoxDecoration(

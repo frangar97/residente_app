@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
           debugShowCheckedModeBanner: false,
           title: kAppTitle,
-          initialRoute: "auth_login",
+          initialRoute: "admin_home",
           routes: getAplicationRoutes()),
     );
   }

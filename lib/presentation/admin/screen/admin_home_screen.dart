@@ -1,14 +1,47 @@
 import 'package:flutter/material.dart';
 import 'package:residente_app/core/utils/style_constants.dart';
 import 'package:residente_app/presentation/admin/widgets/admin_module_card.dart';
+import 'package:residente_app/presentation/admin/widgets/drawer_dashboard.dart';
 
-final modulos = [
-  "Usuarios",
-  "Visitas",
-  "Reservas",
-  "Cartera",
-  "Quejas",
-  "Comunicados"
+class ModuleData {
+  final String nombre;
+  final String ruta;
+  final IconData icon;
+
+  const ModuleData(this.icon, {required this.nombre, required this.ruta});
+}
+
+final nombre = [
+  'Pagos',
+  'Usuarios',
+  'Visitas',
+  'Reservas',
+  'Cartera',
+  'Quejas',
+  'Comunicados',
+  'Encuestas'
+];
+
+final ruta = [
+  'payments_resident_payment',
+  'users',
+  'visits',
+  'reservations',
+  'wallet',
+  'incidents',
+  'releases',
+  'quiz',
+];
+
+List<IconData> icon = [
+  Icons.attach_money_rounded,
+  Icons.person,
+  Icons.input_rounded,
+  Icons.place_rounded,
+  Icons.wallet_rounded,
+  Icons.warning_amber_rounded,
+  Icons.report_rounded,
+  Icons.quiz_rounded,
 ];
 
 class AdminHomeScreen extends StatelessWidget {
@@ -17,75 +50,75 @@ class AdminHomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      drawer: const DrawerDashboard(),
+      drawerScrimColor: Colors.black87,
+      backgroundColor: Colors.grey.shade100,
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(190.0),
+        child: _buildAppBar(context),
+      ),
+      body: _buildBody(context),
+    );
+  }
+
+  Widget _buildAppBar(context) {
+    return Center(
+      child: AppBar(
+        iconTheme: const IconThemeData(
+          color: Colors.black87,
+          size: 30,
+        ),
         elevation: 0,
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.transparent,
         title: const Text(
           "Administrador",
-          style: TextStyle(color: kPrimaryColor),
+          style: subtitleStyle,
         ),
         centerTitle: true,
-        actions: [
-          Container(
-              decoration: const BoxDecoration(color: kPrimaryColor),
-              child: const Icon(Icons.menu)),
-        ],
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(15),
-        child: Column(
-          children: [
-            Container(
-              margin: const EdgeInsets.only(bottom: 10),
-              padding: const EdgeInsets.all(15),
-              decoration: BoxDecoration(
-                  color: kPrimaryColor,
-                  borderRadius: BorderRadius.circular(10)),
-              height: 130,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Row(
-                    children: [
-                      const Spacer(),
-                      SizedBox(
-                        child: Container(
-                          decoration: BoxDecoration(
-                              color: Colors.grey,
-                              borderRadius: BorderRadius.circular(5)),
-                          child: const Icon(Icons.payment,
-                              color: Colors.white, size: 50),
-                        ),
-                      )
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Container(
-                        decoration: BoxDecoration(
-                            color: Colors.yellow,
-                            borderRadius: BorderRadius.circular(5)),
-                        padding: const EdgeInsets.all(10),
-                        child: const Text("Pagos",
-                            style: TextStyle(
-                                fontSize: 20, fontWeight: FontWeight.bold)),
-                      ),
-                      const Spacer()
-                    ],
-                  )
-                ],
+        flexibleSpace: Center(
+          child: Container(
+            height: MediaQuery.of(context).size.height * 0.1,
+            width: MediaQuery.of(context).size.width * 0.4,
+            margin: const EdgeInsets.only(top: 100, bottom: 30),
+            decoration: const BoxDecoration(
+              // borderRadius: BorderRadius.circular(20),
+              image: DecorationImage(
+                fit: BoxFit.fill,
+                alignment: Alignment.bottomCenter,
+                image: NetworkImage(
+                    'https://www.grupowhn.com/images/residencial%20toledo%20logo.png?crc=444117020'),
               ),
             ),
-            Flexible(
-                child: GridView.count(
-              crossAxisSpacing: 8,
-              mainAxisSpacing: 8,
-              crossAxisCount: 2,
-              children: List.generate(modulos.length,
-                  (index) => AdminModuleCard(modulo: modulos[index])),
-            ))
-          ],
+          ),
         ),
+      ),
+    );
+  }
+
+  Widget _buildBody(context) {
+    return Padding(
+      padding: const EdgeInsets.only(
+        left: 20,
+        right: 20,
+        bottom: 10,
+      ),
+      child: Column(
+        children: [
+          Flexible(
+            child: GridView.count(
+              crossAxisSpacing: 15,
+              mainAxisSpacing: 15,
+              crossAxisCount: 2,
+              children: List.generate(
+                  nombre.length,
+                  (index) => AdminModuleCard(
+                        nombre: nombre[index],
+                        ruta: ruta[index],
+                        icon: icon[index],
+                      )),
+            ),
+          ),
+        ],
       ),
     );
   }

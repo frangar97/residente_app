@@ -33,6 +33,14 @@ const subtitle3Style = TextStyle(
   color: kPrimaryColor,
 );
 
+const accountDivider = Divider(
+  color: Colors.black,
+  height: 30,
+  endIndent: 20,
+  indent: 20,
+  thickness: 1,
+);
+
 const defaultDuration = Duration(milliseconds: 250);
 
 // Form Error

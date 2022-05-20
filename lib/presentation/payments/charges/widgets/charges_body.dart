@@ -40,7 +40,9 @@ class _ChargesScreenBodyState extends State<ChargesScreenBody> {
             size: 25,
           ),
           tooltip: 'Atras',
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pop(context);
+          },
         ),
       ),
       actions: <Widget>[
@@ -55,7 +57,7 @@ class _ChargesScreenBodyState extends State<ChargesScreenBody> {
               size: 30,
             ),
             onPressed: () {
-              Navigator.pushNamed(context, "create_fees");
+              Navigator.pushNamed(context, "payments_create_charges");
             },
           ),
         ),
@@ -64,32 +66,37 @@ class _ChargesScreenBodyState extends State<ChargesScreenBody> {
   }
 
   Widget _buildBody() {
-    return Column(
+    return ListView(
+      padding: const EdgeInsets.only(left: 30, right: 30),
       children: <Widget>[
-        const SizedBox(
-          height: 30,
-        ),
-        const Text(
-          'Cargos',
-          style: subtitleStyle,
-        ),
-        const SizedBox(
-          height: 15,
-        ),
-        Expanded(
-          child: ListView.builder(
-            shrinkWrap: true,
-            itemCount: 1,
-            itemBuilder: (context, index) {
-              return _buildFeeItem();
-            },
-          ),
+        Column(
+          children: <Widget>[
+            const SizedBox(
+              height: 30,
+            ),
+            const Text(
+              'Cargos',
+              style: subtitleStyle,
+            ),
+            const SizedBox(
+              height: 15,
+            ),
+            Column(children: [
+              ListView.builder(
+                shrinkWrap: true,
+                itemCount: 1,
+                itemBuilder: (context, index) {
+                  return _buildChargeItem();
+                },
+              ),
+            ]),
+          ],
         ),
       ],
     );
   }
 
-  Widget _buildFeeItem() {
+  Widget _buildChargeItem() {
     return Container(
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20), color: Colors.white),
@@ -99,8 +106,6 @@ class _ChargesScreenBodyState extends State<ChargesScreenBody> {
         left: 20,
       ),
       margin: const EdgeInsets.only(
-        left: 30,
-        right: 30,
         top: 8,
         bottom: 10,
       ),

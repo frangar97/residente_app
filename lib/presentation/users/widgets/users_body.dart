@@ -40,7 +40,9 @@ class _UsersBodyState extends State<UsersBody> {
             size: 25,
           ),
           tooltip: 'Atras',
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pop(context);
+          },
         ),
       ),
       actions: <Widget>[
@@ -55,7 +57,7 @@ class _UsersBodyState extends State<UsersBody> {
               size: 30,
             ),
             onPressed: () {
-              Navigator.pushNamed(context, "create_user");
+              Navigator.pushNamed(context, "create_users");
             },
           ),
         ),
@@ -64,46 +66,48 @@ class _UsersBodyState extends State<UsersBody> {
   }
 
   Widget _buildBody() {
-    return Column(
-      children: <Widget>[
-        const SizedBox(
-          height: 15,
-        ),
-        Container(
-          margin: const EdgeInsets.only(
-            left: 20,
-            right: 20,
-            top: 15,
-            bottom: 15,
+    return ListView(children: [
+      Column(
+        children: <Widget>[
+          const SizedBox(
+            height: 15,
           ),
-          child: TextField(
-            onChanged: (value) {},
-            decoration: const InputDecoration(
-              fillColor: Colors.white,
-              filled: true,
-              labelText: "Buscar",
-              hintText: "Buscar",
-              prefixIcon: Icon(Icons.search),
-              border: OutlineInputBorder(
-                borderSide: BorderSide.none,
-                borderRadius: BorderRadius.all(
-                  Radius.circular(20.0),
+          Container(
+            margin: const EdgeInsets.only(
+              left: 20,
+              right: 20,
+              top: 15,
+              bottom: 15,
+            ),
+            child: TextField(
+              onChanged: (value) {},
+              decoration: const InputDecoration(
+                fillColor: Colors.white,
+                filled: true,
+                labelText: "Buscar",
+                hintText: "Buscar",
+                prefixIcon: Icon(Icons.search),
+                border: OutlineInputBorder(
+                  borderSide: BorderSide.none,
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(20.0),
+                  ),
                 ),
               ),
             ),
           ),
-        ),
-        Expanded(
-          child: ListView.builder(
-            shrinkWrap: true,
-            itemCount: 6,
-            itemBuilder: (context, index) {
-              return _buildUserItem();
-            },
-          ),
-        ),
-      ],
-    );
+          Column(children: [
+            ListView.builder(
+              shrinkWrap: true,
+              itemCount: 6,
+              itemBuilder: (context, index) {
+                return _buildUserItem();
+              },
+            ),
+          ]),
+        ],
+      ),
+    ]);
   }
 
   Widget _buildUserItem() {
