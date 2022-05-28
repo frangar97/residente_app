@@ -71,6 +71,6 @@ final otpInputDecoration = InputDecoration(
 OutlineInputBorder outlineInputBorder() {
   return OutlineInputBorder(
     borderRadius: BorderRadius.circular(20),
-    borderSide: const BorderSide(color: kTextColor),
+    borderSide: BorderSide(color: Colors.orange.shade600),
   );
 }

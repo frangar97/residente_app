@@ -22,8 +22,10 @@ class AuthCubit extends Cubit<AuthState> {
 
   Future<void> login() async {
     emit(state.copyWith(formStatus: FormSubmitting()));
-    final result = await _authRepository.login(state.email, state.password);
+    /*final result = await _authRepository.login(state.email, state.password);
     result.fold((l) => emit(state.copyWith(formStatus: SubmissionFailed())),
-        (r) => emit(state.copyWith(formStatus: SubmissionSuccess())));
+        (r) => emit(state.copyWith(formStatus: SubmissionSuccess())));*/
+
+    emit(state.copyWith(formStatus: SubmissionSuccess()));
   }
 }

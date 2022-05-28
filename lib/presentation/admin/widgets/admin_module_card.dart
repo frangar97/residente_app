@@ -102,12 +102,16 @@ class AdminModuleCard extends StatelessWidget {
           children: [
             const Spacer(),
             SizedBox(
-              height: 100,
+              height: 75,
               child: Icon(icon, color: Colors.blue, size: 60),
             ),
             Container(
               padding: const EdgeInsets.all(10),
-              child: Text(nombre, style: subtitleStyle),
+              child: Text(
+                nombre,
+                style: subtitleStyle,
+                overflow: TextOverflow.ellipsis,
+              ),
             ),
             const Spacer()
           ],

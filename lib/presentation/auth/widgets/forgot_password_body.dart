@@ -88,6 +88,7 @@ class _ForgotPassFormState extends State<ForgotPassForm> {
               return null;
             },
             decoration: InputDecoration(
+              border: outlineInputBorder(),
               labelText: "Correo",
               labelStyle: TextStyle(color: Colors.orange.shade900),
               hintText: "Ingresa tu correo",
