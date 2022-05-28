@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:residente_app/core/utils/style_constants.dart';
 import 'package:residente_app/cubits/comunicado/comunicado_cubit.dart';
 import 'package:residente_app/features/comunicado/comunicado_model.dart';
+import 'package:residente_app/presentation/widgets/loading.dart';
 
 class ReleasesBody extends StatefulWidget {
   const ReleasesBody({Key? key}) : super(key: key);
@@ -74,14 +75,7 @@ class _ReleasesBodyState extends State<ReleasesBody> {
         bloc: BlocProvider.of<ComunicadoCubit>(context)..cargarComunicados(),
         builder: ((context, state) {
           if (state.loadingComunicados) {
-            return Center(
-              child: Column(
-                children: const [
-                  CircularProgressIndicator(),
-                  Text("Cargando Comunicados"),
-                ],
-              ),
-            );
+            return const Loading(mensaje: "Cargando Comunicados");
           }
 
           return Column(

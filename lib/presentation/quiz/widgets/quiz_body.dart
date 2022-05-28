@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:residente_app/core/utils/style_constants.dart';
 import 'package:residente_app/cubits/encuesta/encuesta_cubit.dart';
 import 'package:residente_app/features/encuesta/encuesta_model.dart';
+import 'package:residente_app/presentation/widgets/loading.dart';
 
 class QuizBody extends StatefulWidget {
   const QuizBody({Key? key}) : super(key: key);
@@ -74,14 +75,7 @@ class _QuizBodyState extends State<QuizBody> {
       bloc: BlocProvider.of<EncuestaCubit>(context)..cargarEncuestas(),
       builder: (context, state) {
         if (state.loadingEncuestas) {
-          return Center(
-            child: Column(
-              children: const [
-                CircularProgressIndicator(),
-                Text("Cargando encuestas")
-              ],
-            ),
-          );
+          return const Loading(mensaje: "Cargando Encuestas");
         }
 
         return ListView(

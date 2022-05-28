@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:residente_app/core/utils/style_constants.dart';
 import 'package:residente_app/cubits/incidente/incidente_cubit.dart';
 import 'package:residente_app/features/incidente/incidente_model.dart';
+import 'package:residente_app/presentation/widgets/loading.dart';
 
 class IncidentsBody extends StatefulWidget {
   const IncidentsBody({Key? key}) : super(key: key);
@@ -74,12 +75,7 @@ class _IncidentsBodyState extends State<IncidentsBody> {
       bloc: BlocProvider.of<IncidenteCubit>(context)..cargarIncidentes(),
       builder: (context, state) {
         if (state.loadingIncidentes) {
-          return Center(
-            child: Column(children: const [
-              CircularProgressIndicator(),
-              Text("Cargando Incidentes")
-            ]),
-          );
+          return const Loading(mensaje: "Cargando Incidentes");
         }
 
         return ListView(
