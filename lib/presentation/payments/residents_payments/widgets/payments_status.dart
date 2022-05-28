@@ -14,26 +14,34 @@ class _PaymentsStatusState extends State<PaymentsStatus> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey.shade200,
-      body: Column(
-        children: <Widget>[
-          const SizedBox(
-            height: 30,
+      body: ListView(
+        padding: const EdgeInsets.only(
+          left: 30,
+          right: 30,
+        ),
+        children: [
+          Column(
+            children: <Widget>[
+              const SizedBox(
+                height: 30,
+              ),
+              const DateTimePicker(),
+              const SizedBox(height: 30),
+              _buildCountItem(),
+              const SizedBox(
+                height: 10,
+              ),
+              const Divider(
+                color: Colors.black,
+                height: 30,
+                endIndent: 80,
+                indent: 80,
+                thickness: 1,
+              ),
+              const SizedBox(height: 10),
+              _buildPaymentItem(),
+            ],
           ),
-          const DateTimePicker(),
-          const SizedBox(height: 30),
-          _buildCountItem(),
-          const SizedBox(
-            height: 10,
-          ),
-          const Divider(
-            color: Colors.black,
-            height: 30,
-            endIndent: 80,
-            indent: 80,
-            thickness: 1,
-          ),
-          const SizedBox(height: 10),
-          _buildPaymentItem(),
         ],
       ),
     );
@@ -53,8 +61,6 @@ class _PaymentsStatusState extends State<PaymentsStatus> {
           left: 20,
         ),
         margin: const EdgeInsets.only(
-          left: 30,
-          right: 30,
           top: 8,
           bottom: 10,
         ),
@@ -101,8 +107,6 @@ class _PaymentsStatusState extends State<PaymentsStatus> {
         left: 20,
       ),
       margin: const EdgeInsets.only(
-        left: 30,
-        right: 30,
         top: 8,
         bottom: 10,
       ),

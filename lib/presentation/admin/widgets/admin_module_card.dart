@@ -84,39 +84,32 @@ class AdminModuleCard extends StatelessWidget {
         }
       },
       child: Container(
+        margin: const EdgeInsets.all(5),
         padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
-            color: kPrimaryColor, borderRadius: BorderRadius.circular(20)),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.3),
+                spreadRadius: 2,
+                blurRadius: 1,
+                offset: const Offset(2, 4),
+              ),
+            ],
+            color: Colors.grey.shade100,
+            borderRadius: BorderRadius.circular(20)),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Row(
-              children: [
-                const Spacer(),
-                SizedBox(
-                  child: Container(
-                    height: 50,
-                    width: 50,
-                    decoration: BoxDecoration(
-                        color: Colors.grey,
-                        borderRadius: BorderRadius.circular(15)),
-                    child: Icon(icon, color: Colors.white, size: 35),
-                  ),
-                )
-              ],
+            const Spacer(),
+            SizedBox(
+              height: 100,
+              child: Icon(icon, color: Colors.blue, size: 60),
             ),
-            Row(
-              children: [
-                Container(
-                  decoration: BoxDecoration(
-                      color: Colors.yellow,
-                      borderRadius: BorderRadius.circular(15)),
-                  padding: const EdgeInsets.all(10),
-                  child: Text(nombre, style: subtitleStyle),
-                ),
-                const Spacer()
-              ],
-            )
+            Container(
+              padding: const EdgeInsets.all(10),
+              child: Text(nombre, style: subtitleStyle),
+            ),
+            const Spacer()
           ],
         ),
       ),
@@ -143,7 +136,7 @@ class AdminModuleCard extends StatelessWidget {
           bottom: 10,
         ),
         child: const ListTile(
-            leading: Icon(Icons.three_p_rounded),
+            leading: Icon(Icons.three_p_outlined),
             title: Text(
               'Pagos de Residentes',
               style: subtitleStyle,
@@ -176,7 +169,7 @@ class AdminModuleCard extends StatelessWidget {
           bottom: 10,
         ),
         child: const ListTile(
-            leading: Icon(Icons.three_p_rounded),
+            leading: Icon(Icons.three_p_outlined),
             title: Text(
               'Generar Cuotas',
               style: subtitleStyle,

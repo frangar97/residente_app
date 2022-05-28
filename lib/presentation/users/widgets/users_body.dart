@@ -23,20 +23,21 @@ class _UsersBodyState extends State<UsersBody> {
 
   Widget _buildAppBar() {
     return AppBar(
-      backgroundColor: Colors.black87,
+      flexibleSpace: Container(
+          decoration: const BoxDecoration(gradient: kPrimaryGradientColor)),
       elevation: 0,
       centerTitle: true,
       title: const Text("Usuarios"),
       leading: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
-          color: Colors.yellow.shade600,
+          color: Colors.orange.shade800,
         ),
         margin: const EdgeInsets.all(8),
         child: IconButton(
           icon: const Icon(
             Icons.arrow_back_ios_rounded,
-            color: Colors.black,
+            color: Colors.white,
             size: 25,
           ),
           tooltip: 'Atras',
@@ -130,11 +131,12 @@ class _UsersBodyState extends State<UsersBody> {
         leading: Container(
             padding: const EdgeInsets.all(5),
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15), color: Colors.grey),
+                borderRadius: BorderRadius.circular(15),
+                color: Colors.grey.shade100),
             child: const Icon(
-              Icons.house_rounded,
+              Icons.house_outlined,
               size: 35,
-              color: Colors.white,
+              color: Colors.blue,
             )),
         trailing: Switch(
           value: isSwitched,

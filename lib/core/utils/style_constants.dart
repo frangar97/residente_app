@@ -4,6 +4,9 @@ const kPrimaryColor = Colors.black87;
 const kPrimaryLightColor = Color(0xFFFFECDF);
 const kSecondaryColor = Color(0xFF979797);
 const kTextColor = Color(0xFF757575);
+const kPrimaryGradientColor = LinearGradient(
+  colors: [Color(0xFFFFA53E), Color(0xFFFF7643)],
+);
 
 const kAnimationDuration = Duration(milliseconds: 200);
 
@@ -32,6 +35,9 @@ const subtitle3Style = TextStyle(
   fontWeight: FontWeight.bold,
   color: kPrimaryColor,
 );
+
+const textButtonStyle =
+    TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white);
 
 const accountDivider = Divider(
   color: Colors.black,

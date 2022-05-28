@@ -10,9 +10,7 @@ class DrawerDashboard extends StatelessWidget {
       child: ListView(
         children: [
           DrawerHeader(
-            decoration: const BoxDecoration(
-              color: Colors.black87,
-            ),
+            decoration: const BoxDecoration(gradient: kPrimaryGradientColor),
             child: Center(
               child: Row(
                 children: const <Widget>[

@@ -25,20 +25,21 @@ class _CreateIncomeState extends State<CreateIncome> {
 
   Widget _buildAppBar() {
     return AppBar(
-      backgroundColor: Colors.black87,
+      flexibleSpace: Container(
+          decoration: const BoxDecoration(gradient: kPrimaryGradientColor)),
       elevation: 0,
       centerTitle: true,
       title: const Text("Generar Ingreso"),
       leading: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
-          color: Colors.yellow.shade600,
+          color: Colors.orange.shade800,
         ),
         margin: const EdgeInsets.all(8),
         child: IconButton(
           icon: const Icon(
             Icons.arrow_back_ios_rounded,
-            color: Colors.black,
+            color: Colors.white,
             size: 25,
           ),
           tooltip: 'Atras',
@@ -151,7 +152,7 @@ class _CreateIncomeState extends State<CreateIncome> {
       onPressed: () {},
       child: const Text(
         'Generar Ingreso',
-        style: subtitleStyle,
+        style: textButtonStyle,
       ),
       style: ButtonStyle(
         padding: MaterialStateProperty.all(
@@ -168,7 +169,7 @@ class _CreateIncomeState extends State<CreateIncome> {
           ),
         ),
         backgroundColor: MaterialStateProperty.all(
-          Colors.yellow.shade600,
+          Colors.orange.shade600,
         ),
       ),
     );

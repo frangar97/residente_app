@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:residente_app/core/utils/style_constants.dart';
-import 'package:residente_app/presentation/payments/residents_payments/widgets/payments_status.dart';
 import 'package:residente_app/presentation/visits/widgets/eventual_visit.dart';
 import 'package:residente_app/presentation/visits/widgets/frequent_visit.dart';
 import 'package:scroll_navigation/misc/navigation_helpers.dart';
@@ -29,20 +28,21 @@ class _VisitsBodyState extends State<VisitsBody> {
 
   Widget _buildAppBar() {
     return AppBar(
-      backgroundColor: Colors.black87,
+      flexibleSpace: Container(
+          decoration: const BoxDecoration(gradient: kPrimaryGradientColor)),
       elevation: 0,
       centerTitle: true,
       title: const Text("Visitas"),
       leading: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
-          color: Colors.yellow.shade600,
+          color: Colors.orange.shade800,
         ),
         margin: const EdgeInsets.all(8),
         child: IconButton(
           icon: const Icon(
             Icons.arrow_back_ios_rounded,
-            color: Colors.black,
+            color: Colors.white,
             size: 25,
           ),
           tooltip: 'Atras',
@@ -102,9 +102,9 @@ class _VisitsBodyState extends State<VisitsBody> {
 
   Widget _buildHorizontalTab() {
     return ScrollNavigation(
-      identiferStyle: const NavigationIdentiferStyle(color: Colors.black),
+      identiferStyle: const NavigationIdentiferStyle(color: Colors.blue),
       barStyle: const NavigationBarStyle(
-        activeColor: Colors.black,
+        activeColor: Colors.blue,
         position: NavigationPosition.top,
         background: Colors.white,
         elevation: 0.0,
@@ -115,8 +115,9 @@ class _VisitsBodyState extends State<VisitsBody> {
       ],
       items: const [
         ScrollNavigationItem(
-            title: 'Frecuente', icon: Icon(Icons.fact_check_rounded)),
-        ScrollNavigationItem(title: 'Eventual', icon: Icon(Icons.access_time)),
+            title: 'Frecuente', icon: Icon(Icons.fact_check_outlined)),
+        ScrollNavigationItem(
+            title: 'Eventual', icon: Icon(Icons.access_time_outlined)),
       ],
     );
   }
@@ -141,7 +142,7 @@ class _VisitsBodyState extends State<VisitsBody> {
           bottom: 10,
         ),
         child: const ListTile(
-            leading: Icon(Icons.three_p_rounded),
+            leading: Icon(Icons.three_p_outlined),
             title: Text(
               'Visita Eventual',
               style: subtitleStyle,
@@ -174,7 +175,7 @@ class _VisitsBodyState extends State<VisitsBody> {
           bottom: 10,
         ),
         child: const ListTile(
-            leading: Icon(Icons.three_p_rounded),
+            leading: Icon(Icons.three_p_outlined),
             title: Text(
               'Visita Frecuente',
               style: subtitleStyle,

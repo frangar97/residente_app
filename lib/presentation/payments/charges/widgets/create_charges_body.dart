@@ -25,20 +25,21 @@ class _CreateChargesBodyState extends State<CreateChargesBody> {
 
   Widget _buildAppBar() {
     return AppBar(
-      backgroundColor: Colors.black87,
+      flexibleSpace: Container(
+          decoration: const BoxDecoration(gradient: kPrimaryGradientColor)),
       elevation: 0,
       centerTitle: true,
       title: const Text("Generar Cargo"),
       leading: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
-          color: Colors.yellow.shade600,
+          color: Colors.orange.shade800,
         ),
         margin: const EdgeInsets.all(8),
         child: IconButton(
           icon: const Icon(
             Icons.arrow_back_ios_rounded,
-            color: Colors.black,
+            color: Colors.white,
             size: 25,
           ),
           tooltip: 'Atras',
@@ -217,7 +218,7 @@ class _CreateChargesBodyState extends State<CreateChargesBody> {
       onPressed: () {},
       child: const Text(
         'Generar Cargo',
-        style: subtitleStyle,
+        style: textButtonStyle,
       ),
       style: ButtonStyle(
         padding: MaterialStateProperty.all(
@@ -234,7 +235,7 @@ class _CreateChargesBodyState extends State<CreateChargesBody> {
           ),
         ),
         backgroundColor: MaterialStateProperty.all(
-          Colors.yellow.shade600,
+          Colors.orange.shade600,
         ),
       ),
     );

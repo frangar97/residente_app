@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
 import 'package:residente_app/core/utils/style_constants.dart';
 import 'package:residente_app/presentation/admin/widgets/admin_module_card.dart';
 import 'package:residente_app/presentation/admin/widgets/drawer_dashboard.dart';
@@ -34,14 +35,14 @@ final ruta = [
 ];
 
 List<IconData> icon = [
-  Icons.attach_money_rounded,
-  Icons.person,
-  Icons.input_rounded,
-  Icons.place_rounded,
-  Icons.wallet_rounded,
+  Icons.payment_rounded,
+  Icons.groups_outlined,
+  Icons.how_to_reg_outlined,
+  Icons.place_outlined,
+  Icons.account_balance_outlined,
   Icons.warning_amber_rounded,
-  Icons.report_rounded,
-  Icons.quiz_rounded,
+  Icons.report_gmailerrorred_rounded,
+  Icons.quiz_outlined,
 ];
 
 class AdminHomeScreen extends StatelessWidget {
@@ -51,10 +52,10 @@ class AdminHomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: const DrawerDashboard(),
-      drawerScrimColor: Colors.black87,
-      backgroundColor: Colors.grey.shade100,
+      drawerScrimColor: Colors.black54,
+      backgroundColor: Colors.grey.shade200,
       appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(190.0),
+        preferredSize: const Size.fromHeight(230.0),
         child: _buildAppBar(context),
       ),
       body: _buildBody(context),
@@ -62,31 +63,36 @@ class AdminHomeScreen extends StatelessWidget {
   }
 
   Widget _buildAppBar(context) {
-    return Center(
-      child: AppBar(
-        iconTheme: const IconThemeData(
-          color: Colors.black87,
-          size: 30,
+    return ClipPath(
+      clipper: WaveClipperTwo(),
+      child: Container(
+        height: 230,
+        decoration: const BoxDecoration(
+          gradient: kPrimaryGradientColor,
         ),
-        elevation: 0,
-        backgroundColor: Colors.transparent,
-        title: const Text(
-          "Administrador",
-          style: subtitleStyle,
-        ),
-        centerTitle: true,
-        flexibleSpace: Center(
-          child: Container(
-            height: MediaQuery.of(context).size.height * 0.1,
-            width: MediaQuery.of(context).size.width * 0.4,
-            margin: const EdgeInsets.only(top: 100, bottom: 30),
-            decoration: const BoxDecoration(
-              // borderRadius: BorderRadius.circular(20),
-              image: DecorationImage(
-                fit: BoxFit.fill,
-                alignment: Alignment.bottomCenter,
-                image: NetworkImage(
-                    'https://www.grupowhn.com/images/residencial%20toledo%20logo.png?crc=444117020'),
+        child: Center(
+          child: AppBar(
+            iconTheme: IconThemeData(
+              color: Colors.grey.shade100,
+              size: 30,
+            ),
+            elevation: 0,
+            backgroundColor: Colors.transparent,
+            flexibleSpace: Center(
+              child: Container(
+                height: MediaQuery.of(context).size.height * 0.1,
+                width: MediaQuery.of(context).size.width * 0.35,
+                margin: const EdgeInsets.only(
+                  top: 10,
+                ),
+                decoration: const BoxDecoration(
+                  image: DecorationImage(
+                    fit: BoxFit.fill,
+                    alignment: Alignment.bottomCenter,
+                    image: NetworkImage(
+                        'https://www.grupowhn.com/images/residencial%20toledo%20logo.png?crc=444117020'),
+                  ),
+                ),
               ),
             ),
           ),

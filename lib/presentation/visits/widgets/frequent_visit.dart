@@ -50,7 +50,7 @@ class _FrequentVisitState extends State<FrequentVisit> {
           bottom: 10,
         ),
         child: ListTile(
-            leading: const Icon(Icons.three_p_rounded),
+            leading: const Icon(Icons.three_p_outlined),
             title: const Text(
               'Eduardo Suarez',
               style: subtitleStyle,
