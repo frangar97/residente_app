@@ -72,6 +72,10 @@ class _CreateIncomeState extends State<CreateIncome> {
                 const SizedBox(
                   height: 30,
                 ),
+                _buildTitleFormField(),
+                const SizedBox(
+                  height: 30,
+                ),
                 _buildAmountFormField(),
                 const SizedBox(
                   height: 30,
@@ -89,6 +93,23 @@ class _CreateIncomeState extends State<CreateIncome> {
             ),
           ),
         ]);
+  }
+
+  Widget _buildTitleFormField() {
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(20),
+      ),
+      child: const TextField(
+        decoration: InputDecoration(
+          hintStyle: subtitle2Style,
+          hintText: 'Titulo',
+          border: InputBorder.none,
+          contentPadding: EdgeInsets.all(20),
+        ),
+      ),
+    );
   }
 
   Widget _buildAmountFormField() {

@@ -72,6 +72,10 @@ class _CreateQuizState extends State<CreateQuiz> {
                 const SizedBox(
                   height: 30,
                 ),
+                _buildTitleFormField(),
+                const SizedBox(
+                  height: 30,
+                ),
                 _buildLinkFormField(),
                 const SizedBox(
                   height: 30,
@@ -85,6 +89,23 @@ class _CreateQuizState extends State<CreateQuiz> {
             ),
           ),
         ]);
+  }
+
+  Widget _buildTitleFormField() {
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(20),
+      ),
+      child: const TextField(
+        decoration: InputDecoration(
+          hintStyle: subtitle2Style,
+          hintText: 'Titulo',
+          border: InputBorder.none,
+          contentPadding: EdgeInsets.all(20),
+        ),
+      ),
+    );
   }
 
   Widget _buildLinkFormField() {

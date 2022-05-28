@@ -72,6 +72,8 @@ class _CreateIncidentState extends State<CreateIncident> {
                 const SizedBox(
                   height: 30,
                 ),
+                _buildTitleFormField(),
+                const SizedBox(height: 30),
                 _buildPlaceFormField(),
                 const SizedBox(
                   height: 30,
@@ -89,6 +91,23 @@ class _CreateIncidentState extends State<CreateIncident> {
             ),
           ),
         ]);
+  }
+
+  Widget _buildTitleFormField() {
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(20),
+      ),
+      child: const TextField(
+        decoration: InputDecoration(
+          hintStyle: subtitle2Style,
+          hintText: 'Titulo',
+          border: InputBorder.none,
+          contentPadding: EdgeInsets.all(20),
+        ),
+      ),
+    );
   }
 
   Widget _buildPlaceFormField() {
