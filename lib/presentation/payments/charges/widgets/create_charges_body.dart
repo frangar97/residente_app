@@ -103,8 +103,8 @@ class _CreateChargesBodyState extends State<CreateChargesBody> {
     String dropdownValue = 'Toda la residencial';
     return Container(
         padding: const EdgeInsets.only(
-          left: 80,
-          right: 80,
+          left: 70,
+          right: 70,
           top: 8,
           bottom: 8,
         ),

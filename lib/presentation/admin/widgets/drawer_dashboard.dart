@@ -48,7 +48,7 @@ class DrawerDashboard extends StatelessWidget {
               },
             ),
             onTap: () {
-              Navigator.of(context).pop();
+              Navigator.pushNamed(context, 'auth_login');
             },
           ),
         ],

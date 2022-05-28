@@ -128,19 +128,17 @@ class _InfoFrequentVisitState extends State<InfoFrequentVisit> {
   }
 
   Widget _buildAttachedFile() {
-    return Container(
-      margin: const EdgeInsets.only(left: 120, right: 120),
-      alignment: Alignment.topCenter,
-      height: MediaQuery.of(context).size.height * 0.2,
-      width: MediaQuery.of(context).size.width * 0.3,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(100),
-        image: const DecorationImage(
-          fit: BoxFit.fill,
-          alignment: Alignment.topRight,
-          image: NetworkImage(
-            'https://www.rutanmedellin.org/images/1pruebas/foto-persona.jpg',
-          ),
+    return CircleAvatar(
+      maxRadius: 75,
+      backgroundColor: Colors.grey,
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(80),
+        child: Image.network(
+          'https://www.rutanmedellin.org/images/1pruebas/foto-persona.jpg',
+          fit: BoxFit.contain,
+          errorBuilder: (context, error, stackTrace) {
+            return const Text('Sin foto');
+          },
         ),
       ),
     );

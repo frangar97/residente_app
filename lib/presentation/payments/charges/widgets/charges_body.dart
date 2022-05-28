@@ -102,43 +102,44 @@ class _ChargesScreenBodyState extends State<ChargesScreenBody> {
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20), color: Colors.white),
       padding: const EdgeInsets.only(
-        top: 8,
-        bottom: 8,
+        top: 20,
+        bottom: 20,
         left: 20,
+        right: 20,
       ),
       margin: const EdgeInsets.only(
         top: 8,
         bottom: 10,
       ),
-      child: ListTile(
-          leading: RichText(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          RichText(
             text: const TextSpan(
               text: 'Cuota',
               style: subtitleStyle,
               children: <TextSpan>[
                 TextSpan(
-                  text: ' \nMayo 2022',
+                  text: '\nCalle A #100',
                   style: subtitle2Style,
                 )
               ],
             ),
           ),
-          title: RichText(
-            text: const TextSpan(
-              text: '\r\r\r|',
-              style: subtitleStyle,
-              children: <TextSpan>[
-                TextSpan(
-                  text: '\r\r\r\r\r\r\r500.00L',
-                  style: subtitleStyle,
-                )
-              ],
-            ),
+          const Text(
+            '|',
+            style: subtitleStyle,
           ),
-          trailing: const Icon(
+          const Text(
+            '500.00L',
+            style: subtitleStyle,
+          ),
+          const Icon(
             Icons.arrow_forward_ios_rounded,
             color: Colors.black,
-          )),
+          )
+        ],
+      ),
     );
   }
 }
