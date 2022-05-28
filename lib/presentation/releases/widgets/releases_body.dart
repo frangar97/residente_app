@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:residente_app/core/utils/style_constants.dart';
+import 'package:residente_app/cubits/comunicado/comunicado_cubit.dart';
+import 'package:residente_app/features/comunicado/comunicado_model.dart';
 
 class ReleasesBody extends StatefulWidget {
   const ReleasesBody({Key? key}) : super(key: key);
@@ -67,70 +70,89 @@ class _ReleasesBodyState extends State<ReleasesBody> {
   }
 
   Widget _buildBody() {
-    return Column(
-      children: <Widget>[
-        const SizedBox(
-          height: 30,
-        ),
-        const Text(
-          'Comunicados',
-          style: subtitleStyle,
-        ),
-        const SizedBox(
-          height: 15,
-        ),
-        Expanded(
-          child: ListView.builder(
-            shrinkWrap: true,
-            itemCount: 1,
-            itemBuilder: (context, index) {
-              return _buildReleaseItem();
-            },
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildReleaseItem() {
-    return GestureDetector(
-      onTap: () {
-        Navigator.pushNamed(context, 'info_release');
-      },
-      child: Container(
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20), color: Colors.white),
-        padding: const EdgeInsets.only(
-          top: 8,
-          bottom: 8,
-          left: 20,
-        ),
-        margin: const EdgeInsets.only(
-          left: 30,
-          right: 30,
-          top: 8,
-          bottom: 10,
-        ),
-        child: ListTile(
-            leading: const Icon(Icons.report_gmailerrorred_rounded),
-            title: RichText(
-              text: const TextSpan(
-                text: 'Comunicado',
-                style: subtitleStyle,
-                children: <TextSpan>[
-                  TextSpan(
-                    text:
-                        '\nHola residente, te comunicamos que el dia de mañana tendremos mantenimiento de alambradro electrico.',
-                    style: subtitle2Style,
-                  )
+    return BlocBuilder<ComunicadoCubit, ComunicadoState>(
+        bloc: BlocProvider.of<ComunicadoCubit>(context)..cargarComunicados(),
+        builder: ((context, state) {
+          if (state.loadingComunicados) {
+            return Center(
+              child: Column(
+                children: const [
+                  CircularProgressIndicator(),
+                  Text("Cargando Comunicados"),
                 ],
               ),
+            );
+          }
+
+          return Column(
+            children: <Widget>[
+              const SizedBox(
+                height: 30,
+              ),
+              const Text(
+                'Comunicados',
+                style: subtitleStyle,
+              ),
+              const SizedBox(
+                height: 15,
+              ),
+              Expanded(
+                child: ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: state.listaComunicados.length,
+                  itemBuilder: (context, index) {
+                    return _buildReleaseItem(state.listaComunicados[index]);
+                  },
+                ),
+              ),
+            ],
+          );
+        }));
+  }
+
+  Widget _buildReleaseItem(ComunicadoModel comunicado) {
+    return BlocBuilder<ComunicadoCubit, ComunicadoState>(
+      builder: (context, state) {
+        return GestureDetector(
+          onTap: () {
+            context.read<ComunicadoCubit>().seleccionarComunicado(comunicado);
+            Navigator.pushNamed(context, 'info_release');
+          },
+          child: Container(
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20), color: Colors.white),
+            padding: const EdgeInsets.only(
+              top: 8,
+              bottom: 8,
+              left: 20,
             ),
-            trailing: const Icon(
-              Icons.arrow_forward_ios_rounded,
-              color: Colors.black,
-            )),
-      ),
+            margin: const EdgeInsets.only(
+              left: 30,
+              right: 30,
+              top: 8,
+              bottom: 10,
+            ),
+            child: ListTile(
+                leading: const Icon(Icons.report_gmailerrorred_rounded),
+                title: RichText(
+                  text: TextSpan(
+                    text: 'Comunicado',
+                    style: subtitleStyle,
+                    children: <TextSpan>[
+                      TextSpan(
+                        text: '\n${comunicado.descripcion}.',
+                        style: subtitle2Style,
+                      )
+                    ],
+                  ),
+                ),
+                trailing: const Icon(
+                  Icons.arrow_forward_ios_rounded,
+                  color: Colors.black,
+                )),
+          ),
+        );
+      },
     );
   }
 }

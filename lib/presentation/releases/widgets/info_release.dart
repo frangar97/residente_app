@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:residente_app/core/utils/style_constants.dart';
+import 'package:residente_app/cubits/comunicado/comunicado_cubit.dart';
 
 class InfoRelease extends StatefulWidget {
   const InfoRelease({Key? key}) : super(key: key);
@@ -61,53 +63,57 @@ class _InfoReleaseState extends State<InfoRelease> {
   }
 
   Widget _buildReleaseInfoItem() {
-    return Column(
-      verticalDirection: VerticalDirection.down,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: <Widget>[
-        const Text(
-          'Comunicado',
-          style: headingStyle,
-        ),
-        const SizedBox(
-          height: 30,
-        ),
-        _buildReleaseDate(),
-        const SizedBox(
-          height: 30,
-        ),
-        Padding(
-          padding: const EdgeInsets.only(left: 60, right: 60),
-          child: RichText(
-            text: const TextSpan(
-              text: 'Descripcion:',
-              style: subtitle2Style,
-              children: <TextSpan>[
-                TextSpan(
-                  text:
-                      '\n\nHola residente, te comunicamos que el dia de mañana tendremos mantenimiento de alambradro electrico.',
-                  style: subtitleStyle,
-                )
-              ],
+    return BlocBuilder<ComunicadoCubit, ComunicadoState>(
+      builder: (context, state) {
+        final comunicado = state.comunicadoSelected!;
+        return Column(
+          verticalDirection: VerticalDirection.down,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            const Text(
+              'Comunicado',
+              style: headingStyle,
             ),
-          ),
-        ),
-      ],
+            const SizedBox(
+              height: 30,
+            ),
+            _buildReleaseDate(comunicado.fecha),
+            const SizedBox(
+              height: 30,
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 60, right: 60),
+              child: RichText(
+                text: TextSpan(
+                  text: 'Descripcion:',
+                  style: subtitle2Style,
+                  children: <TextSpan>[
+                    TextSpan(
+                      text: '\n\n${comunicado.descripcion}',
+                      style: subtitleStyle,
+                    )
+                  ],
+                ),
+              ),
+            ),
+          ],
+        );
+      },
     );
   }
 
-  Widget _buildReleaseDate() {
+  Widget _buildReleaseDate(String fecha) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: <Widget>[
         RichText(
-          text: const TextSpan(
+          text: TextSpan(
             text: 'Fecha:',
             style: subtitle2Style,
             children: <TextSpan>[
               TextSpan(
-                text: '\r01/05/2022',
+                text: '\r$fecha',
                 style: subtitle2Style,
               )
             ],
