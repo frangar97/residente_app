@@ -54,9 +54,9 @@ class _ResidentsPaymentsBodyState extends State<ResidentsPaymentsBody> {
 
   Widget _buildHorizontalTab() {
     return ScrollNavigation(
-      identiferStyle: const NavigationIdentiferStyle(color: Colors.black),
+      identiferStyle: const NavigationIdentiferStyle(color: Colors.blue),
       barStyle: const NavigationBarStyle(
-        activeColor: Colors.black,
+        activeColor: Colors.blue,
         position: NavigationPosition.top,
         background: Colors.white,
         elevation: 0.0,
@@ -66,8 +66,9 @@ class _ResidentsPaymentsBodyState extends State<ResidentsPaymentsBody> {
         PaymentsStatus(),
       ],
       items: const [
-        ScrollNavigationItem(icon: Icon(Icons.check)),
-        ScrollNavigationItem(icon: Icon(Icons.access_time)),
+        ScrollNavigationItem(title: 'Aprobados', icon: Icon(Icons.check)),
+        ScrollNavigationItem(
+            title: 'Por Aprobar', icon: Icon(Icons.access_time)),
       ],
     );
   }

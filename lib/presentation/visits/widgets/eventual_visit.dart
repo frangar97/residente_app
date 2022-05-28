@@ -52,7 +52,7 @@ class _EventualVisitState extends State<EventualVisit> {
         child: ListTile(
             leading: const Icon(Icons.three_p_outlined),
             title: const Text(
-              'Mario Lopez',
+              'Uber Eats',
               style: subtitleStyle,
             ),
             subtitle: Column(

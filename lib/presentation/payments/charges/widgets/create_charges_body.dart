@@ -100,11 +100,11 @@ class _CreateChargesBodyState extends State<CreateChargesBody> {
   }
 
   Widget _buildApplyCharge() {
-    String dropdownValue = 'Toda la residencial';
+    String dropdownValue = 'Residencial';
     return Container(
         padding: const EdgeInsets.only(
-          left: 70,
-          right: 70,
+          left: 95,
+          right: 95,
           top: 8,
           bottom: 8,
         ),
@@ -126,7 +126,7 @@ class _CreateChargesBodyState extends State<CreateChargesBody> {
             });
           },
           items: <String>[
-            'Toda la residencial',
+            'Residencial',
             'Casa A #100',
             'Casa A #142',
             'Casa B #120'

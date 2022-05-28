@@ -79,6 +79,39 @@ class AdminModuleCard extends StatelessWidget {
               );
             },
           );
+        } else if (ruta == 'visits') {
+          showModalBottomSheet(
+            backgroundColor: Colors.grey.shade200,
+            shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(20),
+              topRight: Radius.circular(20),
+            )),
+            context: context,
+            enableDrag: true,
+            isScrollControlled: true,
+            builder: (context) {
+              return Column(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  const SizedBox(
+                    height: 30,
+                  ),
+                  const Text(
+                    'Pagos',
+                    style: subtitleStyle,
+                  ),
+                  const SizedBox(height: 20),
+                  _buildVisitsItem(context),
+                  const SizedBox(height: 10),
+                  _buildBinnacleVisitsItem(context),
+                  const SizedBox(
+                    height: 30,
+                  ),
+                ],
+              );
+            },
+          );
         } else {
           Navigator.pushNamed(context, ruta);
         }
@@ -276,6 +309,72 @@ Widget _buildAccountStatusItem(context) {
           leading: Icon(Icons.account_balance_rounded),
           title: Text(
             'Estado de Cuenta',
+            style: subtitleStyle,
+          ),
+          trailing: Icon(
+            Icons.arrow_forward_ios_rounded,
+            color: Colors.black,
+          )),
+    ),
+  );
+}
+
+Widget _buildVisitsItem(context) {
+  return GestureDetector(
+    onTap: () {
+      Navigator.pushNamed(context, 'visits');
+    },
+    child: Container(
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(20), color: Colors.white),
+      padding: const EdgeInsets.only(
+        top: 8,
+        bottom: 8,
+        left: 20,
+      ),
+      margin: const EdgeInsets.only(
+        left: 30,
+        right: 30,
+        top: 8,
+        bottom: 10,
+      ),
+      child: const ListTile(
+          leading: Icon(Icons.three_p_outlined),
+          title: Text(
+            'Visitas',
+            style: subtitleStyle,
+          ),
+          trailing: Icon(
+            Icons.arrow_forward_ios_rounded,
+            color: Colors.black,
+          )),
+    ),
+  );
+}
+
+Widget _buildBinnacleVisitsItem(context) {
+  return GestureDetector(
+    onTap: () {
+      Navigator.pushNamed(context, 'binnacle_visits');
+    },
+    child: Container(
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(20), color: Colors.white),
+      padding: const EdgeInsets.only(
+        top: 8,
+        bottom: 8,
+        left: 20,
+      ),
+      margin: const EdgeInsets.only(
+        left: 30,
+        right: 30,
+        top: 8,
+        bottom: 10,
+      ),
+      child: const ListTile(
+          leading: Icon(Icons.list_alt_rounded),
+          title: Text(
+            'Bitacora de Visitas',
             style: subtitleStyle,
           ),
           trailing: Icon(

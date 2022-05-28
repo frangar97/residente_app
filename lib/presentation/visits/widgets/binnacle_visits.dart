@@ -24,20 +24,21 @@ class _BinaccleVisitsState extends State<BinaccleVisits> {
 
   Widget _buildAppBar() {
     return AppBar(
-      backgroundColor: Colors.black87,
+      flexibleSpace: Container(
+          decoration: const BoxDecoration(gradient: kPrimaryGradientColor)),
       elevation: 0,
       centerTitle: true,
       title: const Text("Bitacora de Visitas"),
       leading: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
-          color: Colors.yellow.shade600,
+          color: Colors.orange.shade800,
         ),
         margin: const EdgeInsets.all(8),
         child: IconButton(
           icon: const Icon(
             Icons.arrow_back_ios_rounded,
-            color: Colors.black,
+            color: Colors.white,
             size: 25,
           ),
           tooltip: 'Atras',
@@ -111,21 +112,17 @@ class _BinaccleVisitsState extends State<BinaccleVisits> {
       margin: const EdgeInsets.only(
         bottom: 8,
       ),
-      child: ListTile(
-        title: const Text(
+      child: const ListTile(
+        title: Text(
           'Eduardo Suarez',
           style: subtitleStyle,
         ),
-        leading: Container(
-            padding: const EdgeInsets.all(5),
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15), color: Colors.grey),
-            child: const Icon(
-              Icons.compare_arrows_sharp,
-              size: 35,
-              color: Colors.white,
-            )),
-        trailing: const Text('8:00am'),
+        leading: Icon(
+          Icons.compare_arrows_sharp,
+          size: 35,
+          color: Colors.blue,
+        ),
+        trailing: Text('8:00am'),
       ),
     );
   }
