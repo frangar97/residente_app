@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:residente_app/core/utils/style_constants.dart';
+import 'package:residente_app/cubits/encuesta/encuesta_cubit.dart';
+import 'package:residente_app/features/encuesta/encuesta_model.dart';
 
 class QuizBody extends StatefulWidget {
   const QuizBody({Key? key}) : super(key: key);
@@ -67,38 +70,56 @@ class _QuizBodyState extends State<QuizBody> {
   }
 
   Widget _buildBody() {
-    return ListView(
-        padding: const EdgeInsets.only(left: 30, right: 30),
-        children: [
-          Column(
-            children: <Widget>[
-              const SizedBox(
-                height: 30,
+    return BlocBuilder<EncuestaCubit, EncuestaState>(
+      bloc: BlocProvider.of<EncuestaCubit>(context)..cargarEncuestas(),
+      builder: (context, state) {
+        if (state.loadingEncuestas) {
+          return Center(
+            child: Column(
+              children: const [
+                CircularProgressIndicator(),
+                Text("Cargando encuestas")
+              ],
+            ),
+          );
+        }
+
+        return ListView(
+            padding: const EdgeInsets.only(left: 30, right: 30),
+            children: [
+              Column(
+                children: <Widget>[
+                  const SizedBox(
+                    height: 30,
+                  ),
+                  const Text(
+                    'Encuestas',
+                    style: subtitleStyle,
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  Column(children: [
+                    ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: state.listaEncuestas.length,
+                      itemBuilder: (context, index) {
+                        return _buildIncidentItem(
+                            context, state.listaEncuestas[index]);
+                      },
+                    ),
+                  ]),
+                ],
               ),
-              const Text(
-                'Encuestas',
-                style: subtitleStyle,
-              ),
-              const SizedBox(
-                height: 15,
-              ),
-              Column(children: [
-                ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: 1,
-                  itemBuilder: (context, index) {
-                    return _buildIncidentItem();
-                  },
-                ),
-              ]),
-            ],
-          ),
-        ]);
+            ]);
+      },
+    );
   }
 
-  Widget _buildIncidentItem() {
+  Widget _buildIncidentItem(BuildContext context, EncuestaModel encuesta) {
     return GestureDetector(
       onTap: () {
+        context.read<EncuestaCubit>().seleccionarEncuesta(encuesta);
         Navigator.pushNamed(context, 'info_quiz');
       },
       child: Container(
@@ -116,12 +137,12 @@ class _QuizBodyState extends State<QuizBody> {
         child: ListTile(
             leading: const Icon(Icons.quiz),
             title: RichText(
-              text: const TextSpan(
-                text: 'Encuesta',
+              text: TextSpan(
+                text: encuesta.titulo,
                 style: subtitleStyle,
                 children: <TextSpan>[
                   TextSpan(
-                    text: '\nAyudanos a llenar esta encuesta residente.',
+                    text: '\n${encuesta.descripcion}.',
                     style: subtitle2Style,
                   )
                 ],

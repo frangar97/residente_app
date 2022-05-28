@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:residente_app/core/utils/style_constants.dart';
+import 'package:residente_app/cubits/encuesta/encuesta_cubit.dart';
 
 class InfoQuiz extends StatefulWidget {
   const InfoQuiz({Key? key}) : super(key: key);
@@ -61,68 +63,73 @@ class _InfoQuizState extends State<InfoQuiz> {
   }
 
   Widget _buildQuizInfoItem() {
-    return Column(
-      verticalDirection: VerticalDirection.down,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: <Widget>[
-        const Text(
-          'Encuesta',
-          style: headingStyle,
-        ),
-        const SizedBox(
-          height: 30,
-        ),
-        _buildQuizDate(),
-        const SizedBox(
-          height: 30,
-        ),
-        Padding(
-          padding: const EdgeInsets.only(left: 60, right: 60),
-          child: RichText(
-            text: const TextSpan(
-              text: 'Descripcion:',
-              style: subtitle2Style,
-              children: <TextSpan>[
-                TextSpan(
-                  text:
-                      '\n\nEsta encuesta es para crear el analisis necesario para la puesta de postes solares.',
-                  style: subtitleStyle,
-                )
-              ],
+    return BlocBuilder<EncuestaCubit, EncuestaState>(
+      builder: (context, state) {
+        final encuesta = state.encuestaSelected!;
+
+        return Column(
+          verticalDirection: VerticalDirection.down,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Text(
+              encuesta.titulo,
+              style: headingStyle,
             ),
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(top: 30, left: 60, right: 60),
-          child: RichText(
-            text: const TextSpan(
-              text: 'Link:',
-              style: subtitle2Style,
-              children: <TextSpan>[
-                TextSpan(
-                  text: '\n\nhttps://quizizz.com/?fromBrowserLoad=true',
-                  style: subtitleStyle,
-                )
-              ],
+            const SizedBox(
+              height: 30,
             ),
-          ),
-        ),
-      ],
+            _buildQuizDate(encuesta.fecha),
+            const SizedBox(
+              height: 30,
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 60, right: 60),
+              child: RichText(
+                text: TextSpan(
+                  text: 'Descripcion:',
+                  style: subtitle2Style,
+                  children: <TextSpan>[
+                    TextSpan(
+                      text: '\n\n${encuesta.descripcion}.',
+                      style: subtitleStyle,
+                    )
+                  ],
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 30, left: 60, right: 60),
+              child: RichText(
+                text: TextSpan(
+                  text: 'Link:',
+                  style: subtitle2Style,
+                  children: <TextSpan>[
+                    TextSpan(
+                      text: '\n\n${encuesta.link}',
+                      style: subtitleStyle,
+                    )
+                  ],
+                ),
+              ),
+            ),
+          ],
+        );
+      },
     );
   }
 
-  Widget _buildQuizDate() {
+  Widget _buildQuizDate(String fecha) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: <Widget>[
         RichText(
-          text: const TextSpan(
+          text: TextSpan(
             text: 'Fecha:',
             style: subtitle2Style,
             children: <TextSpan>[
               TextSpan(
-                text: '\r01/05/2022',
+                text: '\r$fecha',
                 style: subtitle2Style,
               )
             ],
