@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:residente_app/cubits/auth/auth_cubit.dart';
 import 'package:residente_app/cubits/comunicado/comunicado_cubit.dart';
+import 'package:residente_app/cubits/incidente/incidente_cubit.dart';
 import "package:residente_app/dependency_injection/injection_container.dart"
     as di;
 
@@ -14,7 +15,8 @@ class StateProvider extends StatelessWidget {
     return MultiBlocProvider(providers: [
       BlocProvider(create: (_) => AuthCubit(authRepository: di.sl())),
       BlocProvider(
-          create: (_) => ComunicadoCubit(comunicadoRepository: di.sl()))
+          create: (_) => ComunicadoCubit(comunicadoRepository: di.sl())),
+      BlocProvider(create: (_) => IncidenteCubit(incidenteRepository: di.sl()))
     ], child: child);
   }
 }

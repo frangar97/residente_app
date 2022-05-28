@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:residente_app/core/utils/style_constants.dart';
+import 'package:residente_app/cubits/incidente/incidente_cubit.dart';
+import 'package:residente_app/features/incidente/incidente_model.dart';
 
 class IncidentsBody extends StatefulWidget {
   const IncidentsBody({Key? key}) : super(key: key);
@@ -67,71 +70,90 @@ class _IncidentsBodyState extends State<IncidentsBody> {
   }
 
   Widget _buildBody() {
-    return ListView(
-        padding: const EdgeInsets.only(left: 30, right: 30),
-        children: [
-          Column(
-            children: <Widget>[
-              const SizedBox(
-                height: 30,
-              ),
-              const Text(
-                'Incidentes/Quejas',
-                style: subtitleStyle,
-              ),
-              const SizedBox(
-                height: 15,
-              ),
-              Column(children: [
-                ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: 1,
-                  itemBuilder: (context, index) {
-                    return _buildIncidentItem();
-                  },
-                ),
-              ]),
-            ],
-          ),
-        ]);
-  }
+    return BlocBuilder<IncidenteCubit, IncidenteState>(
+      bloc: BlocProvider.of<IncidenteCubit>(context)..cargarIncidentes(),
+      builder: (context, state) {
+        if (state.loadingIncidentes) {
+          return Center(
+            child: Column(children: const [
+              CircularProgressIndicator(),
+              Text("Cargando Incidentes")
+            ]),
+          );
+        }
 
-  Widget _buildIncidentItem() {
-    return GestureDetector(
-      onTap: () {
-        Navigator.pushNamed(context, 'info_incidents');
-      },
-      child: Container(
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20), color: Colors.white),
-        padding: const EdgeInsets.only(
-          top: 8,
-          bottom: 8,
-          left: 20,
-        ),
-        margin: const EdgeInsets.only(
-          top: 8,
-          bottom: 10,
-        ),
-        child: ListTile(
-            leading: const Icon(Icons.warning_amber_rounded),
-            title: RichText(
-              text: const TextSpan(
-                text: 'Fuga de agua',
-                style: subtitleStyle,
-                children: <TextSpan>[
-                  TextSpan(
-                    text: '\nFuga de agua en tubo de la calle A',
-                    style: subtitle2Style,
-                  )
+        return ListView(
+            padding: const EdgeInsets.only(left: 30, right: 30),
+            children: [
+              Column(
+                children: <Widget>[
+                  const SizedBox(
+                    height: 30,
+                  ),
+                  const Text(
+                    'Incidentes/Quejas',
+                    style: subtitleStyle,
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  Column(children: [
+                    ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: state.listaIncidentes.length,
+                      itemBuilder: (context, index) {
+                        return _buildIncidentItem(state.listaIncidentes[index]);
+                      },
+                    ),
+                  ]),
                 ],
               ),
+            ]);
+      },
+    );
+  }
+
+  Widget _buildIncidentItem(IncidenteModel incidente) {
+    return BlocBuilder<IncidenteCubit, IncidenteState>(
+      builder: (context, state) {
+        return GestureDetector(
+          onTap: () {
+            context.read<IncidenteCubit>().seleccionarIncidente(incidente);
+            Navigator.pushNamed(context, 'info_incidents');
+          },
+          child: Container(
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20), color: Colors.white),
+            padding: const EdgeInsets.only(
+              top: 8,
+              bottom: 8,
+              left: 20,
             ),
-            trailing: const Icon(
-              Icons.arrow_forward_ios_rounded,
-              color: Colors.black,
-            )),
-      ),
+            margin: const EdgeInsets.only(
+              top: 8,
+              bottom: 10,
+            ),
+            child: ListTile(
+                leading: const Icon(Icons.warning_amber_rounded),
+                title: RichText(
+                  text: TextSpan(
+                    text: incidente.titulo,
+                    style: subtitleStyle,
+                    children: <TextSpan>[
+                      TextSpan(
+                        text: '\n${incidente.descripcion}',
+                        style: subtitle2Style,
+                      )
+                    ],
+                  ),
+                ),
+                trailing: const Icon(
+                  Icons.arrow_forward_ios_rounded,
+                  color: Colors.black,
+                )),
+          ),
+        );
+      },
     );
   }
 }

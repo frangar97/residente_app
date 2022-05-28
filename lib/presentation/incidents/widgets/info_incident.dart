@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:residente_app/core/utils/style_constants.dart';
+import 'package:residente_app/cubits/incidente/incidente_cubit.dart';
 
 class InfoIncidet extends StatefulWidget {
   const InfoIncidet({Key? key}) : super(key: key);
@@ -23,30 +25,34 @@ class _InfoIncidetState extends State<InfoIncidet> {
   }
 
   Widget _buildAppBar() {
-    return AppBar(
-      flexibleSpace: Container(
-          decoration: const BoxDecoration(gradient: kPrimaryGradientColor)),
-      elevation: 0,
-      centerTitle: true,
-      title: const Text("Fuga de agua"),
-      leading: Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(15),
-          color: Colors.orange.shade800,
-        ),
-        margin: const EdgeInsets.all(8),
-        child: IconButton(
-          icon: const Icon(
-            Icons.arrow_back_ios_rounded,
-            color: Colors.white,
-            size: 25,
+    return BlocBuilder<IncidenteCubit, IncidenteState>(
+      builder: (context, state) {
+        return AppBar(
+          flexibleSpace: Container(
+              decoration: const BoxDecoration(gradient: kPrimaryGradientColor)),
+          elevation: 0,
+          centerTitle: true,
+          title: Text(state.incidenteSelected!.titulo),
+          leading: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(15),
+              color: Colors.orange.shade800,
+            ),
+            margin: const EdgeInsets.all(8),
+            child: IconButton(
+              icon: const Icon(
+                Icons.arrow_back_ios_rounded,
+                color: Colors.white,
+                size: 25,
+              ),
+              tooltip: 'Atras',
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
           ),
-          tooltip: 'Atras',
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-      ),
+        );
+      },
     );
   }
 
@@ -76,67 +82,72 @@ class _InfoIncidetState extends State<InfoIncidet> {
   }
 
   Widget _buildIncidentInfoItem() {
-    return Column(
-      verticalDirection: VerticalDirection.down,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: <Widget>[
-        const Text(
-          'Fuga de agua',
-          style: headingStyle,
-        ),
-        const SizedBox(
-          height: 30,
-        ),
-        _buildIncidentDate(),
-        const SizedBox(
-          height: 30,
-        ),
-        RichText(
-          text: const TextSpan(
-            text: 'Lugar:',
-            style: subtitle2Style,
-            children: <TextSpan>[
-              TextSpan(
-                text: 'Calle A ',
-                style: subtitle2Style,
-              )
-            ],
-          ),
-        ),
-        const SizedBox(
-          height: 30,
-        ),
-        Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: RichText(
-            text: const TextSpan(
-              text: 'Descripcion:',
-              style: subtitle2Style,
-              children: <TextSpan>[
-                TextSpan(
-                  text: '\n\nFuga de agua en tubo de la calle A',
-                  style: subtitleStyle,
-                )
-              ],
+    return BlocBuilder<IncidenteCubit, IncidenteState>(
+      builder: (context, state) {
+        final incidente = state.incidenteSelected!;
+        return Column(
+          verticalDirection: VerticalDirection.down,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+             Text(
+              incidente.titulo,
+              style: headingStyle,
             ),
-          ),
-        ),
-      ],
+            const SizedBox(
+              height: 30,
+            ),
+            _buildIncidentDate(incidente.fecha),
+            const SizedBox(
+              height: 30,
+            ),
+            RichText(
+              text:  TextSpan(
+                text: 'Lugar: ',
+                style: subtitle2Style,
+                children: <TextSpan>[
+                  TextSpan(
+                    text: incidente.lugar,
+                    style: subtitle2Style,
+                  )
+                ],
+              ),
+            ),
+            const SizedBox(
+              height: 30,
+            ),
+            Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: RichText(
+                text:  TextSpan(
+                  text: 'Descripcion:',
+                  style: subtitle2Style,
+                  children: <TextSpan>[
+                    TextSpan(
+                      text: '\n\n${incidente.descripcion}',
+                      style: subtitleStyle,
+                    )
+                  ],
+                ),
+              ),
+            ),
+          ],
+        );
+      },
     );
   }
 
-  Widget _buildIncidentDate() {
+  Widget _buildIncidentDate(String fecha) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: <Widget>[
         RichText(
-          text: const TextSpan(
+          text:  TextSpan(
             text: 'Fecha:',
             style: subtitle2Style,
             children: <TextSpan>[
               TextSpan(
-                text: '\r01/05/2022',
+                text: '\r$fecha',
                 style: subtitle2Style,
               )
             ],
