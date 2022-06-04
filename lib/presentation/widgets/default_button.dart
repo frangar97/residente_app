@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:residente_app/core/utils/style_constants.dart';
 
 class DefaultButton extends StatelessWidget {
   const DefaultButton({
@@ -20,7 +19,7 @@ class DefaultButton extends StatelessWidget {
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
           primary: Colors.white,
-          backgroundColor: kPrimaryColor,
+          backgroundColor: Colors.orange.shade600,
         ),
         onPressed: onPress as void Function(),
         child: child,

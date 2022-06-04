@@ -13,7 +13,7 @@ class _CreateChargesBodyState extends State<CreateChargesBody> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
+      resizeToAvoidBottomInset: true,
       backgroundColor: Colors.grey.shade200,
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(60.0),
@@ -25,20 +25,21 @@ class _CreateChargesBodyState extends State<CreateChargesBody> {
 
   Widget _buildAppBar() {
     return AppBar(
-      backgroundColor: Colors.black87,
+      flexibleSpace: Container(
+          decoration: const BoxDecoration(gradient: kPrimaryGradientColor)),
       elevation: 0,
       centerTitle: true,
       title: const Text("Generar Cargo"),
       leading: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
-          color: Colors.yellow.shade600,
+          color: Colors.orange.shade800,
         ),
         margin: const EdgeInsets.all(8),
         child: IconButton(
           icon: const Icon(
             Icons.arrow_back_ios_rounded,
-            color: Colors.black,
+            color: Colors.white,
             size: 25,
           ),
           tooltip: 'Atras',
@@ -51,55 +52,59 @@ class _CreateChargesBodyState extends State<CreateChargesBody> {
   }
 
   Widget _buildBody() {
-    return Center(
-      child: Column(
-        children: <Widget>[
-          const SizedBox(
-            height: 30,
+    return ListView(
+        padding: const EdgeInsets.only(left: 30, right: 30),
+        children: [
+          Center(
+            child: Column(
+              children: <Widget>[
+                const SizedBox(
+                  height: 30,
+                ),
+                const Text(
+                  'Cargo',
+                  style: subtitleStyle,
+                ),
+                const SizedBox(
+                  height: 30,
+                ),
+                _buildApplyCharge(),
+                const SizedBox(
+                  height: 30,
+                ),
+                _buildTypeCharge(),
+                const SizedBox(
+                  height: 30,
+                ),
+                const DateTimePicker(),
+                const SizedBox(
+                  height: 30,
+                ),
+                const DateTimePicker(),
+                const SizedBox(
+                  height: 30,
+                ),
+                _buildAmountFormField(),
+                const SizedBox(
+                  height: 30,
+                ),
+                _buildNoteFormField(),
+                const SizedBox(
+                  height: 50,
+                ),
+                _buildCenerateFeeButton(),
+              ],
+            ),
           ),
-          const Text(
-            'Cargo',
-            style: subtitleStyle,
-          ),
-          const SizedBox(
-            height: 30,
-          ),
-          _buildApplyCharge(),
-          const SizedBox(
-            height: 30,
-          ),
-          _buildTypeCharge(),
-          const SizedBox(
-            height: 30,
-          ),
-          const DateTimePicker(),
-          const SizedBox(
-            height: 30,
-          ),
-          const DateTimePicker(),
-          const SizedBox(
-            height: 30,
-          ),
-          _buildAmountFormField(),
-          const SizedBox(
-            height: 30,
-          ),
-          _buildNoteFormField(),
-          const SizedBox(
-            height: 50,
-          ),
-          _buildCenerateFeeButton(),
-        ],
-      ),
-    );
+        ]);
   }
 
   Widget _buildApplyCharge() {
-    String dropdownValue = 'Toda la residencial';
+    String dropdownValue = 'Residencial';
     return Container(
         padding: const EdgeInsets.only(
-          left: 60,
-          right: 60,
+          left: 95,
+          right: 95,
           top: 8,
           bottom: 8,
         ),
@@ -121,7 +126,7 @@ class _CreateChargesBodyState extends State<CreateChargesBody> {
             });
           },
           items: <String>[
-            'Toda la residencial',
+            'Residencial',
             'Casa A #100',
             'Casa A #142',
             'Casa B #120'
@@ -176,10 +181,6 @@ class _CreateChargesBodyState extends State<CreateChargesBody> {
 
   Widget _buildAmountFormField() {
     return Container(
-      margin: const EdgeInsets.only(
-        left: 40,
-        right: 40,
-      ),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(20),
@@ -197,10 +198,6 @@ class _CreateChargesBodyState extends State<CreateChargesBody> {
 
   Widget _buildNoteFormField() {
     return Container(
-      margin: const EdgeInsets.only(
-        left: 40,
-        right: 40,
-      ),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(20),
@@ -221,7 +218,7 @@ class _CreateChargesBodyState extends State<CreateChargesBody> {
       onPressed: () {},
       child: const Text(
         'Generar Cargo',
-        style: subtitleStyle,
+        style: textButtonStyle,
       ),
       style: ButtonStyle(
         padding: MaterialStateProperty.all(
@@ -238,7 +235,7 @@ class _CreateChargesBodyState extends State<CreateChargesBody> {
           ),
         ),
         backgroundColor: MaterialStateProperty.all(
-          Colors.yellow.shade600,
+          Colors.orange.shade600,
         ),
       ),
     );

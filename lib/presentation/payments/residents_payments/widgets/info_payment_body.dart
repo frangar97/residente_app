@@ -24,20 +24,21 @@ class _InfoPaymentBodyState extends State<InfoPaymentBody> {
 
   Widget _buildAppBar() {
     return AppBar(
-      backgroundColor: Colors.black87,
+      flexibleSpace: Container(
+          decoration: const BoxDecoration(gradient: kPrimaryGradientColor)),
       elevation: 0,
       centerTitle: true,
       title: const Text("Calle A #100"),
       leading: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
-          color: Colors.yellow.shade600,
+          color: Colors.orange.shade800,
         ),
         margin: const EdgeInsets.all(8),
         child: IconButton(
           icon: const Icon(
             Icons.arrow_back_ios_rounded,
-            color: Colors.black,
+            color: Colors.white,
             size: 25,
           ),
           tooltip: 'Atras',
@@ -50,41 +51,43 @@ class _InfoPaymentBodyState extends State<InfoPaymentBody> {
   }
 
   Widget _buildBody() {
-    return Column(
-      children: <Widget>[
-        const SizedBox(
-          height: 30,
-        ),
-        RichText(
-          text: const TextSpan(
-            text: 'Cuota',
-            style: subtitle2Style,
-            children: <TextSpan>[
-              TextSpan(
-                text: ' Agosto 2022',
-                style: subtitleStyle,
-              )
-            ],
+    return ListView(children: [
+      Column(
+        children: <Widget>[
+          const SizedBox(
+            height: 30,
           ),
-        ),
-        const SizedBox(height: 30),
-        _buildPaymentInfoItem(),
-        const SizedBox(height: 30),
-        _buildAttachedFile(),
-        const SizedBox(height: 20),
-        const Divider(
-          color: Colors.black,
-          height: 30,
-          endIndent: 130,
-          indent: 130,
-          thickness: 1,
-        ),
-        const SizedBox(height: 20),
-        _buildNoteFormField(),
-        const SizedBox(height: 20),
-        _buildAprovedRejectButtons()
-      ],
-    );
+          RichText(
+            text: const TextSpan(
+              text: 'Cuota',
+              style: subtitle2Style,
+              children: <TextSpan>[
+                TextSpan(
+                  text: ' Agosto 2022',
+                  style: subtitleStyle,
+                )
+              ],
+            ),
+          ),
+          const SizedBox(height: 30),
+          _buildPaymentInfoItem(),
+          const SizedBox(height: 30),
+          _buildAttachedFile(),
+          const SizedBox(height: 20),
+          const Divider(
+            color: Colors.black,
+            height: 30,
+            endIndent: 130,
+            indent: 130,
+            thickness: 1,
+          ),
+          const SizedBox(height: 20),
+          _buildNoteFormField(),
+          const SizedBox(height: 20),
+          _buildAprovedRejectButtons()
+        ],
+      ),
+    ]);
   }
 
   Widget _buildPaymentInfoItem() {
@@ -278,7 +281,7 @@ class _InfoPaymentBodyState extends State<InfoPaymentBody> {
           onPressed: () {},
           child: const Text(
             'Aprobar',
-            style: subtitleStyle,
+            style: textButtonStyle,
           ),
           style: ButtonStyle(
             padding: MaterialStateProperty.all(
@@ -295,7 +298,7 @@ class _InfoPaymentBodyState extends State<InfoPaymentBody> {
               ),
             ),
             backgroundColor: MaterialStateProperty.all(
-              Colors.yellow.shade600,
+              Colors.orange.shade600,
             ),
           ),
         ),

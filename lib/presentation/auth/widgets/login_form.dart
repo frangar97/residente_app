@@ -128,6 +128,7 @@ class _LoginFormState extends State<LoginForm> {
             return null;
           },
           decoration: InputDecoration(
+            border: outlineInputBorder(),
             labelText: "Contraseña",
             labelStyle: TextStyle(
               color: Colors.orange.shade900,
@@ -166,6 +167,7 @@ class _LoginFormState extends State<LoginForm> {
         return null;
       },
       decoration: InputDecoration(
+        border: outlineInputBorder(),
         labelText: "Correo",
         labelStyle: TextStyle(
           color: Colors.orange.shade900,

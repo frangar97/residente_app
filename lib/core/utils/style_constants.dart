@@ -4,11 +4,21 @@ const kPrimaryColor = Colors.black87;
 const kPrimaryLightColor = Color(0xFFFFECDF);
 const kSecondaryColor = Color(0xFF979797);
 const kTextColor = Color(0xFF757575);
+const kPrimaryGradientColor = LinearGradient(
+  colors: [Color(0xFFFFA53E), Color(0xFFFF7643)],
+);
 
 const kAnimationDuration = Duration(milliseconds: 200);
 
 const headingStyle = TextStyle(
   fontSize: 28,
+  fontWeight: FontWeight.bold,
+  color: kPrimaryColor,
+  height: 1.5,
+);
+
+const heading2Style = TextStyle(
+  fontSize: 35,
   fontWeight: FontWeight.bold,
   color: kPrimaryColor,
   height: 1.5,
@@ -31,6 +41,17 @@ const subtitle3Style = TextStyle(
   fontSize: 25,
   fontWeight: FontWeight.bold,
   color: kPrimaryColor,
+);
+
+const textButtonStyle =
+    TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white);
+
+const accountDivider = Divider(
+  color: Colors.black,
+  height: 30,
+  endIndent: 20,
+  indent: 20,
+  thickness: 1,
 );
 
 const defaultDuration = Duration(milliseconds: 250);
@@ -57,6 +78,6 @@ final otpInputDecoration = InputDecoration(
 OutlineInputBorder outlineInputBorder() {
   return OutlineInputBorder(
     borderRadius: BorderRadius.circular(20),
-    borderSide: const BorderSide(color: kTextColor),
+    borderSide: BorderSide(color: Colors.orange.shade600),
   );
 }

@@ -23,24 +23,27 @@ class _UsersBodyState extends State<UsersBody> {
 
   Widget _buildAppBar() {
     return AppBar(
-      backgroundColor: Colors.black87,
+      flexibleSpace: Container(
+          decoration: const BoxDecoration(gradient: kPrimaryGradientColor)),
       elevation: 0,
       centerTitle: true,
       title: const Text("Usuarios"),
       leading: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
-          color: Colors.yellow.shade600,
+          color: Colors.orange.shade800,
         ),
         margin: const EdgeInsets.all(8),
         child: IconButton(
           icon: const Icon(
             Icons.arrow_back_ios_rounded,
-            color: Colors.black,
+            color: Colors.white,
             size: 25,
           ),
           tooltip: 'Atras',
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pop(context);
+          },
         ),
       ),
       actions: <Widget>[
@@ -55,7 +58,7 @@ class _UsersBodyState extends State<UsersBody> {
               size: 30,
             ),
             onPressed: () {
-              Navigator.pushNamed(context, "create_user");
+              Navigator.pushNamed(context, "create_users");
             },
           ),
         ),
@@ -64,46 +67,48 @@ class _UsersBodyState extends State<UsersBody> {
   }
 
   Widget _buildBody() {
-    return Column(
-      children: <Widget>[
-        const SizedBox(
-          height: 15,
-        ),
-        Container(
-          margin: const EdgeInsets.only(
-            left: 20,
-            right: 20,
-            top: 15,
-            bottom: 15,
+    return ListView(children: [
+      Column(
+        children: <Widget>[
+          const SizedBox(
+            height: 15,
           ),
-          child: TextField(
-            onChanged: (value) {},
-            decoration: const InputDecoration(
-              fillColor: Colors.white,
-              filled: true,
-              labelText: "Buscar",
-              hintText: "Buscar",
-              prefixIcon: Icon(Icons.search),
-              border: OutlineInputBorder(
-                borderSide: BorderSide.none,
-                borderRadius: BorderRadius.all(
-                  Radius.circular(20.0),
+          Container(
+            margin: const EdgeInsets.only(
+              left: 20,
+              right: 20,
+              top: 15,
+              bottom: 15,
+            ),
+            child: TextField(
+              onChanged: (value) {},
+              decoration: const InputDecoration(
+                fillColor: Colors.white,
+                filled: true,
+                labelText: "Buscar",
+                hintText: "Buscar",
+                prefixIcon: Icon(Icons.search),
+                border: OutlineInputBorder(
+                  borderSide: BorderSide.none,
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(20.0),
+                  ),
                 ),
               ),
             ),
           ),
-        ),
-        Expanded(
-          child: ListView.builder(
-            shrinkWrap: true,
-            itemCount: 6,
-            itemBuilder: (context, index) {
-              return _buildUserItem();
-            },
-          ),
-        ),
-      ],
-    );
+          Column(children: [
+            ListView.builder(
+              shrinkWrap: true,
+              itemCount: 6,
+              itemBuilder: (context, index) {
+                return _buildUserItem();
+              },
+            ),
+          ]),
+        ],
+      ),
+    ]);
   }
 
   Widget _buildUserItem() {
@@ -126,11 +131,12 @@ class _UsersBodyState extends State<UsersBody> {
         leading: Container(
             padding: const EdgeInsets.all(5),
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15), color: Colors.grey),
+                borderRadius: BorderRadius.circular(15),
+                color: Colors.grey.shade100),
             child: const Icon(
-              Icons.house_rounded,
+              Icons.house_outlined,
               size: 35,
-              color: Colors.white,
+              color: Colors.blue,
             )),
         trailing: Switch(
           value: isSwitched,

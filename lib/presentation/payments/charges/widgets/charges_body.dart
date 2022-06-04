@@ -23,24 +23,27 @@ class _ChargesScreenBodyState extends State<ChargesScreenBody> {
 
   Widget _buildAppBar() {
     return AppBar(
-      backgroundColor: Colors.black87,
+      flexibleSpace: Container(
+          decoration: const BoxDecoration(gradient: kPrimaryGradientColor)),
       elevation: 0,
       centerTitle: true,
       title: const Text("Generar Cargos"),
       leading: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
-          color: Colors.yellow.shade600,
+          color: Colors.orange.shade800,
         ),
         margin: const EdgeInsets.all(8),
         child: IconButton(
           icon: const Icon(
             Icons.arrow_back_ios_rounded,
-            color: Colors.black,
+            color: Colors.white,
             size: 25,
           ),
           tooltip: 'Atras',
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pop(context);
+          },
         ),
       ),
       actions: <Widget>[
@@ -55,7 +58,7 @@ class _ChargesScreenBodyState extends State<ChargesScreenBody> {
               size: 30,
             ),
             onPressed: () {
-              Navigator.pushNamed(context, "create_fees");
+              Navigator.pushNamed(context, "payments_create_charges");
             },
           ),
         ),
@@ -64,75 +67,84 @@ class _ChargesScreenBodyState extends State<ChargesScreenBody> {
   }
 
   Widget _buildBody() {
-    return Column(
+    return ListView(
+      padding: const EdgeInsets.only(left: 30, right: 30),
       children: <Widget>[
-        const SizedBox(
-          height: 30,
-        ),
-        const Text(
-          'Cargos',
-          style: subtitleStyle,
-        ),
-        const SizedBox(
-          height: 15,
-        ),
-        Expanded(
-          child: ListView.builder(
-            shrinkWrap: true,
-            itemCount: 1,
-            itemBuilder: (context, index) {
-              return _buildFeeItem();
-            },
-          ),
+        Column(
+          children: <Widget>[
+            const SizedBox(
+              height: 30,
+            ),
+            const Text(
+              'Cargos',
+              style: subtitleStyle,
+            ),
+            const SizedBox(
+              height: 15,
+            ),
+            Column(children: [
+              ListView.builder(
+                shrinkWrap: true,
+                itemCount: 1,
+                itemBuilder: (context, index) {
+                  return _buildChargeItem();
+                },
+              ),
+            ]),
+          ],
         ),
       ],
     );
   }
 
-  Widget _buildFeeItem() {
-    return Container(
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20), color: Colors.white),
-      padding: const EdgeInsets.only(
-        top: 8,
-        bottom: 8,
-        left: 20,
-      ),
-      margin: const EdgeInsets.only(
-        left: 30,
-        right: 30,
-        top: 8,
-        bottom: 10,
-      ),
-      child: ListTile(
-          leading: RichText(
-            text: const TextSpan(
-              text: 'Cuota',
-              style: subtitleStyle,
-              children: <TextSpan>[
-                TextSpan(
-                  text: ' \nMayo 2022',
-                  style: subtitle2Style,
-                )
-              ],
+  Widget _buildChargeItem() {
+    return GestureDetector(
+      onTap: () {
+        Navigator.pushNamed(context, 'payments_info_charge');
+      },
+      child: Container(
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20), color: Colors.white),
+        padding: const EdgeInsets.only(
+          top: 20,
+          bottom: 20,
+          left: 20,
+          right: 20,
+        ),
+        margin: const EdgeInsets.only(
+          top: 8,
+          bottom: 10,
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            RichText(
+              text: const TextSpan(
+                text: 'Cuota',
+                style: subtitleStyle,
+                children: <TextSpan>[
+                  TextSpan(
+                    text: '\nResidencial',
+                    style: subtitle2Style,
+                  )
+                ],
+              ),
             ),
-          ),
-          title: RichText(
-            text: const TextSpan(
-              text: '\r\r\r|',
+            const Text(
+              '|',
               style: subtitleStyle,
-              children: <TextSpan>[
-                TextSpan(
-                  text: '\r\r\r\r\r\r\r500.00L',
-                  style: subtitleStyle,
-                )
-              ],
             ),
-          ),
-          trailing: const Icon(
-            Icons.arrow_forward_ios_rounded,
-            color: Colors.black,
-          )),
+            const Text(
+              '500.00L',
+              style: subtitleStyle,
+            ),
+            const Icon(
+              Icons.arrow_forward_ios_rounded,
+              color: Colors.black,
+            )
+          ],
+        ),
+      ),
     );
   }
 }
