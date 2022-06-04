@@ -17,6 +17,13 @@ const headingStyle = TextStyle(
   height: 1.5,
 );
 
+const heading2Style = TextStyle(
+  fontSize: 35,
+  fontWeight: FontWeight.bold,
+  color: kPrimaryColor,
+  height: 1.5,
+);
+
 const subtitleStyle = TextStyle(
   fontSize: 18,
   fontWeight: FontWeight.bold,

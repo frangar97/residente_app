@@ -98,47 +98,52 @@ class _ChargesScreenBodyState extends State<ChargesScreenBody> {
   }
 
   Widget _buildChargeItem() {
-    return Container(
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20), color: Colors.white),
-      padding: const EdgeInsets.only(
-        top: 20,
-        bottom: 20,
-        left: 20,
-        right: 20,
-      ),
-      margin: const EdgeInsets.only(
-        top: 8,
-        bottom: 10,
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          RichText(
-            text: const TextSpan(
-              text: 'Cuota',
-              style: subtitleStyle,
-              children: <TextSpan>[
-                TextSpan(
-                  text: '\nCalle A #100',
-                  style: subtitle2Style,
-                )
-              ],
+    return GestureDetector(
+      onTap: () {
+        Navigator.pushNamed(context, 'payments_info_charge');
+      },
+      child: Container(
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20), color: Colors.white),
+        padding: const EdgeInsets.only(
+          top: 20,
+          bottom: 20,
+          left: 20,
+          right: 20,
+        ),
+        margin: const EdgeInsets.only(
+          top: 8,
+          bottom: 10,
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            RichText(
+              text: const TextSpan(
+                text: 'Cuota',
+                style: subtitleStyle,
+                children: <TextSpan>[
+                  TextSpan(
+                    text: '\nResidencial',
+                    style: subtitle2Style,
+                  )
+                ],
+              ),
             ),
-          ),
-          const Text(
-            '|',
-            style: subtitleStyle,
-          ),
-          const Text(
-            '500.00L',
-            style: subtitleStyle,
-          ),
-          const Icon(
-            Icons.arrow_forward_ios_rounded,
-            color: Colors.black,
-          )
-        ],
+            const Text(
+              '|',
+              style: subtitleStyle,
+            ),
+            const Text(
+              '500.00L',
+              style: subtitleStyle,
+            ),
+            const Icon(
+              Icons.arrow_forward_ios_rounded,
+              color: Colors.black,
+            )
+          ],
+        ),
       ),
     );
   }
