@@ -114,7 +114,7 @@ class _ReservationBodyState extends State<ReservationBody> {
           bottom: 10,
         ),
         child: ListTile(
-            leading: const Icon(Icons.place_rounded),
+            leading: const Icon(Icons.calendar_month_outlined),
             title: RichText(
               text: const TextSpan(
                 text: 'Calle A #100',

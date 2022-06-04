@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
 import 'package:residente_app/core/utils/style_constants.dart';
 import 'package:residente_app/presentation/admin/widgets/admin_module_card.dart';
-import 'package:residente_app/presentation/admin/widgets/drawer_dashboard.dart';
+import 'package:residente_app/presentation/resident/menu/widgets/drawer_dashboard.dart';
 
 class ModuleData {
   final String nombre;
@@ -14,21 +14,25 @@ class ModuleData {
 
 final nombre = [
   'Pagos',
-  'Usuarios',
+  'Chat Caseta',
   'Visitas',
   'Reservas',
-  'Cartera',
+  'Mis Autos',
+  'Alerta',
+  'Gastos',
   'Quejas',
   'Comunicados',
   'Encuestas'
 ];
 
 final ruta = [
-  'payments_resident_payment',
+  'resident_payment_dashboard',
   'users',
   'visits',
   'reservations',
-  'wallet',
+  'vehicles',
+  'panic_alert',
+  'expenses',
   'incidents',
   'releases',
   'quiz',
@@ -36,17 +40,19 @@ final ruta = [
 
 List<IconData> icon = [
   Icons.payment_rounded,
-  Icons.groups_outlined,
+  Icons.chat_bubble_outline,
   Icons.how_to_reg_outlined,
   Icons.calendar_month_outlined,
-  Icons.account_balance_outlined,
+  Icons.directions_car_filled_outlined,
+  Icons.report_gmailerrorred_rounded,
+  Icons.outbox_outlined,
   Icons.warning_amber_rounded,
   Icons.campaign_outlined,
   Icons.quiz_outlined,
 ];
 
-class AdminHomeScreen extends StatelessWidget {
-  const AdminHomeScreen({Key? key}) : super(key: key);
+class ResidentMenuScreen extends StatelessWidget {
+  const ResidentMenuScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

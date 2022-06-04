@@ -7,8 +7,10 @@ import 'package:residente_app/presentation/incidents/widgets/create_incident.dar
 import 'package:residente_app/presentation/incidents/widgets/info_incident.dart';
 import 'package:residente_app/presentation/payments/charges/screens/charges_screen.dart';
 import 'package:residente_app/presentation/payments/charges/screens/create_charges_screen.dart';
+import 'package:residente_app/presentation/payments/charges/widgets/info_charge.dart';
 import 'package:residente_app/presentation/payments/residents_payments/screens/info_payment_screen.dart';
 import 'package:residente_app/presentation/payments/residents_payments/screens/residents_payments_screen.dart';
+import 'package:residente_app/presentation/profile/screens/profile_screen.dart';
 import 'package:residente_app/presentation/quiz/screens/quiz_screen.dart';
 import 'package:residente_app/presentation/quiz/widgets/create_quiz.dart';
 import 'package:residente_app/presentation/quiz/widgets/info_quiz.dart';
@@ -18,6 +20,17 @@ import 'package:residente_app/presentation/releases/widgets/info_release.dart';
 import 'package:residente_app/presentation/reservations/screens/reservation_screen.dart';
 import 'package:residente_app/presentation/reservations/widgets/create_reservation.dart';
 import 'package:residente_app/presentation/reservations/widgets/info_reservation.dart';
+import 'package:residente_app/presentation/resident/dashboard/screens/resident_dashboard.dart';
+import 'package:residente_app/presentation/resident/menu/screen/resident_menu_screen.dart';
+import 'package:residente_app/presentation/resident/panic_alert/screens/panic_alert_screen.dart';
+import 'package:residente_app/presentation/resident/payments/widgets/info_payment_body.dart';
+import 'package:residente_app/presentation/resident/payments/widgets/info_pending_payment.dart';
+import 'package:residente_app/presentation/resident/payments/widgets/pending_payment.dart';
+import 'package:residente_app/presentation/resident/payments/screens/payments_screen.dart';
+import 'package:residente_app/presentation/resident/payments/widgets/create_payment.dart';
+import 'package:residente_app/presentation/resident/vehicles/screens/vehicles_screen.dart';
+import 'package:residente_app/presentation/resident/vehicles/widgets/create_vehicle.dart';
+import 'package:residente_app/presentation/resident/vehicles/widgets/info_vehicle.dart';
 import 'package:residente_app/presentation/users/screens/create_user_screen.dart';
 import 'package:residente_app/presentation/users/screens/users_screen.dart';
 import 'package:residente_app/presentation/visits/screens/visits_screen.dart';
@@ -43,6 +56,7 @@ Map<String, WidgetBuilder> getAplicationRoutes() {
     "users": (_) => const UsersScreen(),
     "create_users": (_) => const CreateUserScreen(),
     "payments_charges": (_) => const ChargesScreen(),
+    "payments_info_charge": (_) => const InfoCharge(),
     "payments_create_charges": (_) => const CreateChargesScreen(),
     "payments_resident_info": (_) => const InfoPaymentsScreen(),
     "payments_resident_payment": (_) => const ResidentsPaymentsScreen(),
@@ -72,5 +86,17 @@ Map<String, WidgetBuilder> getAplicationRoutes() {
     "create_eventual_visit": (_) => const CreateEventualVisit(),
     "create_frequent_visit": (_) => const CreateFrequentVisit(),
     "binnacle_visits": (_) => const BinaccleVisits(),
+    "resident_payment_dashboard": (_) => const ResidentDashboard(),
+    "resident_menu": (_) => const ResidentMenuScreen(),
+    "payments": (_) => const PaymentsScreen(),
+    "info_payments_resident": (_) => const InfoResidentPaymentBody(),
+    "pending_payment": (_) => const PendingPayment(),
+    "info_pending_payment": (_) => const InfoPendingPayment(),
+    "create_payment": (_) => const CreatePayment(),
+    "vehicles": (_) => const VehiclesScreen(),
+    "create_vehicle": (_) => const CreateVehicle(),
+    "info_vehicle": (_) => const InfoVehicle(),
+    "panic_alert": (_) => const PanicAlert(),
+    "profile": (_) => const ProfileScreen(),
   };
 }
