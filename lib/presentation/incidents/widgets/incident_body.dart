@@ -19,13 +19,13 @@ class _IncidentsBodyState extends State<IncidentsBody> {
       backgroundColor: Colors.grey.shade200,
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(60.0),
-        child: _buildAppBar(),
+        child: _buildAppBar(context),
       ),
       body: _buildBody(),
     );
   }
 
-  Widget _buildAppBar() {
+  Widget _buildAppBar(BuildContext context) {
     return AppBar(
       flexibleSpace: Container(
           decoration: const BoxDecoration(gradient: kPrimaryGradientColor)),
@@ -62,6 +62,7 @@ class _IncidentsBodyState extends State<IncidentsBody> {
               size: 30,
             ),
             onPressed: () {
+              context.read<IncidenteCubit>().resetearCreacion();
               Navigator.pushNamed(context, "create_incident");
             },
           ),
