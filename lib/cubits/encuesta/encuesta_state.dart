@@ -32,14 +32,14 @@ class EncuestaState extends Equatable {
     FormSubmissionStatus? formStatus,
   }) {
     return EncuestaState(
-      encuestaSelected: encuestaSelected ?? this.encuestaSelected,
-      loadingEncuestas: loadingEncuestas ?? this.loadingEncuestas,
-      listaEncuestas: listaEncuestas ?? this.listaEncuestas,
-      titulo: titulo ?? this.titulo,
-      descripcion: descripcion ?? this.descripcion,
-      link: link ?? this.link,
-      fecha: fecha ?? this.fecha,
-    );
+        encuestaSelected: encuestaSelected ?? this.encuestaSelected,
+        loadingEncuestas: loadingEncuestas ?? this.loadingEncuestas,
+        listaEncuestas: listaEncuestas ?? this.listaEncuestas,
+        titulo: titulo ?? this.titulo,
+        descripcion: descripcion ?? this.descripcion,
+        link: link ?? this.link,
+        fecha: fecha ?? this.fecha,
+        formStatus: formStatus ?? this.formStatus);
   }
 
   @override

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:residente_app/core/utils/style_constants.dart';
 import 'package:residente_app/cubits/auth/form_submission_status.dart';
 import 'package:residente_app/cubits/encuesta/encuesta_cubit.dart';
@@ -91,7 +92,68 @@ class _CreateQuizState extends State<CreateQuiz> {
                       const SizedBox(
                         height: 30,
                       ),
-                      const DateTimePicker(),
+                      Column(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          ElevatedButton(
+                            style: ButtonStyle(
+                                elevation: MaterialStateProperty.all(0),
+                                shape: MaterialStateProperty.all(
+                                  RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20.0),
+                                  ),
+                                ),
+                                backgroundColor:
+                                    MaterialStateProperty.all(Colors.white)),
+                            onPressed: () {
+                              DatePicker.showDatePicker(context,
+                                  theme: const DatePickerTheme(
+                                    backgroundColor: Colors.white,
+                                    containerHeight: 210.0,
+                                  ),
+                                  showTitleActions: true,
+                                  minTime: DateTime(2000, 1, 1),
+                                  maxTime: DateTime(2022, 12, 31),
+                                  onConfirm: (date) {
+                                context.read<EncuestaCubit>().onChangeFecha(
+                                    '${date.year}-${date.month}-${date.day}');
+                              },
+                                  currentTime: DateTime.now(),
+                                  locale: LocaleType.en);
+                            },
+                            child: Container(
+                              alignment: Alignment.center,
+                              height: 65.0,
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: <Widget>[
+                                  Row(
+                                    children: <Widget>[
+                                      Row(
+                                        children: <Widget>[
+                                          Text(
+                                            state.fecha == ""
+                                                ? "Fecha"
+                                                : state.fecha,
+                                            style: subtitle2Style,
+                                          ),
+                                        ],
+                                      )
+                                    ],
+                                  ),
+                                  const Icon(
+                                    Icons.date_range,
+                                    size: 25.0,
+                                    color: kSecondaryColor,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                       const SizedBox(
                         height: 30,
                       ),
