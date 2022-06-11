@@ -1,9 +1,12 @@
+import 'dart:convert';
+
 import 'package:http/http.dart' as http;
 import 'package:residente_app/core/error/exceptions.dart';
 import 'package:residente_app/core/utils/constants.dart';
+import 'package:residente_app/features/auth/auth_model.dart';
 
 abstract class AuthDataSource {
-  Future<bool> login(String email, String password);
+  Future<AuthModel> login(String email, String password);
 }
 
 class AuthDataSourceImpl implements AuthDataSource {
@@ -12,14 +15,15 @@ class AuthDataSourceImpl implements AuthDataSource {
   AuthDataSourceImpl({required this.client});
 
   @override
-  Future<bool> login(String email, String password) async {
+  Future<AuthModel> login(String email, String password) async {
     final url = Uri.http(kBaseUrl, "/api/login");
 
-    final req =
-        await client.post(url, body: {"email": email, "password": password});
+    final req = await client.post(url,
+        body: jsonEncode({"email": email, "password": password}),
+        headers: {"Content-Type": "application/json"});
 
     if (req.statusCode == 201) {
-      return true;
+      return AuthModel.fromJson(jsonDecode(req.body));
     }
 
     throw ServerException();
