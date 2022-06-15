@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:residente_app/features/visita/tipo_visita_model.dart';
 import 'package:residente_app/features/visita/visita_model.dart';
 import 'package:residente_app/features/visita/visita_repository.dart';
 
@@ -13,7 +14,10 @@ class VisitaCubit extends Cubit<VisitaState> {
   Future<void> cargarVisitasFrecuentes() async {
     emit(state.copyWith(loadingVisitasFrecuentes: true));
     final visitasFrecuentes = await visitaRepository.getVisitasFrecuentes();
+    final tipos = await visitaRepository.getTiposVisita();
     emit(state.copyWith(
-        loadingVisitasFrecuentes: false, visitasFrecuentes: visitasFrecuentes));
+        loadingVisitasFrecuentes: false,
+        visitasFrecuentes: visitasFrecuentes,
+        tipoVisita: tipos));
   }
 }
