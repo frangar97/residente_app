@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:residente_app/core/utils/dialogs.dart';
 import 'package:residente_app/core/utils/style_constants.dart';
 
 class ResidentModuleCard extends StatelessWidget {
