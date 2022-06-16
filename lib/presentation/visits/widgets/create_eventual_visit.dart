@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 import 'package:residente_app/core/utils/style_constants.dart';
-import 'package:residente_app/presentation/visits/widgets/info_eventual_visit.dart';
-import 'package:residente_app/presentation/widgets/date_time_picker.dart';
+import 'package:residente_app/cubits/auth/form_submission_status.dart';
+import 'package:residente_app/cubits/visita/visita_cubit.dart';
+import 'package:residente_app/features/visita/tipo_visita_model.dart';
+import 'package:residente_app/helper/keyboard.dart';
+import 'package:residente_app/helper/snack_bar.dart';
 
 class CreateEventualVisit extends StatefulWidget {
   const CreateEventualVisit({Key? key}) : super(key: key);
@@ -11,8 +16,8 @@ class CreateEventualVisit extends StatefulWidget {
 }
 
 class _CreateEventualVisitState extends State<CreateEventualVisit> {
-  String? dropdownValue = null;
-  final TextEditingController _nombre = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,72 +61,155 @@ class _CreateEventualVisitState extends State<CreateEventualVisit> {
 
   Widget _buildBody() {
     bool isSwitched = false;
-    return ListView(
-      children: <Widget>[
-        Padding(
-          padding: const EdgeInsets.only(left: 40, right: 40),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+    return BlocConsumer<VisitaCubit, VisitaState>(
+      listener: (context, state) {
+        final formStatus = state.formStatus;
+
+        if (formStatus is SubmissionFailed) {
+          showSnackBar(
+              context, "Ha ocurrido un error y no se pudo crear el incidente.");
+        }
+
+        if (formStatus is SubmissionSuccess) {
+          Navigator.of(context).pop();
+        }
+      },
+      builder: (context, state) {
+        return Form(
+          key: _formKey,
+          child: ListView(
             children: <Widget>[
-              const SizedBox(
-                height: 30,
-              ),
-              const Center(
-                child: Text(
-                  'Visita Eventual',
-                  style: subtitleStyle,
+              Padding(
+                padding: const EdgeInsets.only(left: 40, right: 40),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    const SizedBox(
+                      height: 30,
+                    ),
+                    const Center(
+                      child: Text(
+                        'Visita Eventual',
+                        style: subtitleStyle,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 30,
+                    ),
+                    _buildVisitType(context, state),
+                    const SizedBox(
+                      height: 30,
+                    ),
+                    Column(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        ElevatedButton(
+                          style: ButtonStyle(
+                              elevation: MaterialStateProperty.all(0),
+                              shape: MaterialStateProperty.all(
+                                RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(20.0),
+                                ),
+                              ),
+                              backgroundColor:
+                                  MaterialStateProperty.all(Colors.white)),
+                          onPressed: () {
+                            DatePicker.showDatePicker(context,
+                                theme: const DatePickerTheme(
+                                  backgroundColor: Colors.white,
+                                  containerHeight: 210.0,
+                                ),
+                                showTitleActions: true,
+                                minTime: DateTime(2000, 1, 1),
+                                maxTime: DateTime(2022, 12, 31),
+                                onConfirm: (date) {
+                              context.read<VisitaCubit>().onChangeFecha(
+                                  '${date.year}-${date.month}-${date.day}');
+                            },
+                                currentTime: DateTime.now(),
+                                locale: LocaleType.en);
+                          },
+                          child: Container(
+                            alignment: Alignment.center,
+                            height: 65.0,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: <Widget>[
+                                Row(
+                                  children: <Widget>[
+                                    Row(
+                                      children: <Widget>[
+                                        Text(
+                                          state.fecha == ""
+                                              ? "Fecha"
+                                              : state.fecha,
+                                          style: subtitle2Style,
+                                        ),
+                                      ],
+                                    )
+                                  ],
+                                ),
+                                const Icon(
+                                  Icons.date_range,
+                                  size: 25.0,
+                                  color: kSecondaryColor,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 30),
+                    _buildNameFormField(context),
+                    const SizedBox(
+                      height: 30,
+                    ),
+                    _buildNoteFormField(context),
+                    const SizedBox(
+                      height: 40,
+                    ),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        const Text(
+                          'Es Evento/Fiesta',
+                          style: subtitle2Style,
+                        ),
+                        Switch(
+                          value: isSwitched,
+                          onChanged: (value) {
+                            setState(() {
+                              isSwitched = value;
+                            });
+                          },
+                        ),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 40,
+                    ),
+                    //_buildQrCode(),
+                    const SizedBox(
+                      height: 40,
+                    ),
+                    _buildCenerateVisitButton(),
+                    const SizedBox(
+                      height: 40,
+                    ),
+                  ],
                 ),
-              ),
-              const SizedBox(
-                height: 30,
-              ),
-              _buildVisitType(),
-              const SizedBox(
-                height: 30,
-              ),
-              const DateTimePicker(),
-              const SizedBox(height: 30),
-              _buildNameFormField(),
-              const SizedBox(
-                height: 30,
-              ),
-              _buildNoteFormField(),
-              const SizedBox(
-                height: 40,
-              ),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  const Text(
-                    'Es Evento/Fiesta',
-                    style: subtitle2Style,
-                  ),
-                  Switch(
-                    value: isSwitched,
-                    onChanged: (value) {
-                      setState(() {
-                        isSwitched = value;
-                      });
-                    },
-                  ),
-                ],
-              ),
-              const SizedBox(
-                height: 40,
-              ),
-              _buildCenerateVisitButton(),
-              const SizedBox(
-                height: 40,
               ),
             ],
           ),
-        ),
-      ],
+        );
+      },
     );
   }
 
-  Widget _buildVisitType() {
+  Widget _buildVisitType(BuildContext context, VisitaState state) {
     return Container(
         padding: const EdgeInsets.only(
           left: 60,
@@ -133,37 +221,43 @@ class _CreateEventualVisitState extends State<CreateEventualVisit> {
           borderRadius: BorderRadius.circular(20),
           color: Colors.white,
         ),
-        child: DropdownButton<String>(
+        child: DropdownButton<TipoVisitaModel>(
           borderRadius: BorderRadius.circular(20),
           dropdownColor: Colors.white,
-          value: dropdownValue,
+          value: state.tipoVisitaSeleccionado,
           icon: const Icon(
             Icons.arrow_drop_down,
           ),
           style: subtitleStyle,
-          onChanged: (String? newValue) {
-            setState(() {
-              dropdownValue = newValue!;
-            });
+          onChanged: (TipoVisitaModel? newValue) {
+            context.read<VisitaCubit>().seleccionarTipoVisita(newValue);
           },
-          items: <String>['Familiar', 'Servicio a Domicilio', 'Tecnico', 'Aseo']
-              .map<DropdownMenuItem<String>>((String value) {
-            return DropdownMenuItem<String>(
+          items: state.tipoVisita
+              .map<DropdownMenuItem<TipoVisitaModel>>((TipoVisitaModel value) {
+            return DropdownMenuItem<TipoVisitaModel>(
               value: value,
-              child: Text(value),
+              child: Text(value.nombre),
             );
           }).toList(),
         ));
   }
 
-  Widget _buildNameFormField() {
+  Widget _buildNameFormField(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(20),
       ),
-      child: TextField(
-        controller: _nombre,
+      child: TextFormField(
+        onChanged: (value) {
+          context.read<VisitaCubit>().onChangeNombre(value);
+        },
+        validator: (value) {
+          if (value!.isEmpty) {
+            return "";
+          }
+          return null;
+        },
         decoration: const InputDecoration(
           hintStyle: subtitle2Style,
           hintText: 'Nombre',
@@ -174,14 +268,23 @@ class _CreateEventualVisitState extends State<CreateEventualVisit> {
     );
   }
 
-  Widget _buildNoteFormField() {
+  Widget _buildNoteFormField(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(20),
       ),
-      child: const TextField(
-        decoration: InputDecoration(
+      child: TextFormField(
+        onChanged: (value) {
+          context.read<VisitaCubit>().onChangeNota(value);
+        },
+        validator: (value) {
+          if (value!.isEmpty) {
+            return "";
+          }
+          return null;
+        },
+        decoration: const InputDecoration(
           hintStyle: subtitle2Style,
           hintText: 'Nota',
           border: InputBorder.none,
@@ -191,10 +294,81 @@ class _CreateEventualVisitState extends State<CreateEventualVisit> {
     );
   }
 
+  Widget _buildQrCode() {
+    return GestureDetector(
+      onTap: () {
+        showDialog(
+          context: context,
+          builder: (ctx) => AlertDialog(
+            backgroundColor: Colors.grey.shade200,
+            shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(20.0))),
+            title: const Center(child: Text("Compartir:")),
+            content: _buildWhatsAppShare(),
+            actions: <Widget>[
+              TextButton(
+                onPressed: () {
+                  Navigator.of(ctx).pop();
+                },
+                child: const Text(
+                  "Ok",
+                  style: subtitleStyle,
+                ),
+              ),
+            ],
+            actionsPadding: EdgeInsets.zero,
+          ),
+        );
+      },
+      child: Center(
+        child: Container(
+          alignment: Alignment.topCenter,
+          height: MediaQuery.of(context).size.height * 0.2,
+          width: MediaQuery.of(context).size.width * 0.45,
+          decoration: const BoxDecoration(
+            image: DecorationImage(
+              fit: BoxFit.fill,
+              alignment: Alignment.topRight,
+              image: NetworkImage(
+                'https://qrcode.tec-it.com/API/QRCode?data=smsto%3A555-555-5555%3AGenerador+de+C%C3%B3digos+QR+de+TEC-IT',
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildWhatsAppShare() {
+    return Container(
+      margin: const EdgeInsets.only(left: 80, right: 80),
+      padding: const EdgeInsets.all(20),
+      alignment: Alignment.bottomCenter,
+      height: 75,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(20),
+        image: const DecorationImage(
+          fit: BoxFit.scaleDown,
+          image: NetworkImage(
+            'https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/WhatsApp_logo-color-vertical.svg/2048px-WhatsApp_logo-color-vertical.svg.png',
+          ),
+        ),
+      ),
+    );
+  }
+
   Widget _buildCenerateVisitButton() {
     return Center(
       child: TextButton(
-        onPressed: () {},
+        onPressed: () {
+          if (!_formKey.currentState!.validate()) {
+            _formKey.currentState!.save();
+            showSnackBar(context, "Por favor llene todos los campos.");
+            return;
+          }
+          KeyboardUtil.hideKeyboard(context);
+          context.read<VisitaCubit>().crearVisitaEventual();
+        },
         child: const Text(
           'Generar Visita',
           style: textButtonStyle,

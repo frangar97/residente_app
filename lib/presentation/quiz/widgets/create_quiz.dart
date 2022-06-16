@@ -6,7 +6,6 @@ import 'package:residente_app/cubits/auth/form_submission_status.dart';
 import 'package:residente_app/cubits/encuesta/encuesta_cubit.dart';
 import 'package:residente_app/helper/keyboard.dart';
 import 'package:residente_app/helper/snack_bar.dart';
-import 'package:residente_app/presentation/widgets/date_time_picker.dart';
 
 class CreateQuiz extends StatefulWidget {
   const CreateQuiz({Key? key}) : super(key: key);
