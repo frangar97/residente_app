@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
           ],
           debugShowCheckedModeBanner: false,
           title: kAppTitle,
-          initialRoute: "admin_home",
+          initialRoute: "auth_login",
           routes: getAplicationRoutes()),
     );
   }

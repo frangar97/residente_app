@@ -85,7 +85,7 @@ Map<String, WidgetBuilder> getAplicationRoutes() {
     "account_status": (_) => const AccountStatusScreen(),
     "visits": (_) => const VisitsScreen(),
     "info_frequent_visit": (_) => const InfoFrequentVisit(),
-    "info_eventual_visit": (_) => InfoEventualVisit(),
+    "info_eventual_visit": (_) => const InfoEventualVisit(),
     "create_eventual_visit": (_) => const CreateEventualVisit(),
     "create_frequent_visit": (_) => const CreateFrequentVisit(),
     "binnacle_visits": (_) => const BinaccleVisits(),

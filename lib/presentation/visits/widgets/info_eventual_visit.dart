@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:residente_app/core/utils/style_constants.dart';
 import 'package:qr_flutter/qr_flutter.dart';
-import 'package:residente_app/presentation/admin/screen/admin_home_screen.dart';
 
 class InfoEventualVisit extends StatefulWidget {
-  InfoEventualVisit({Key? key,})
-      : super(key: key);
+  const InfoEventualVisit({
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<InfoEventualVisit> createState() => _InfoEventualVisitState();

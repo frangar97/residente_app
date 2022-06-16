@@ -57,7 +57,7 @@ class VisitaDataSourceImpl implements VisitaDataSource {
     final request = await http.post(url, body: {
       "nombre": nombre,
       "notas": nota,
-      "tipo_visita_id": tipoVisitaId,
+      "tipo_visita_id": tipoVisitaId.toString(),
       "fecha": fecha
     });
 
