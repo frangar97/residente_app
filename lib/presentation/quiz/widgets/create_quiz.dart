@@ -119,7 +119,7 @@ class _CreateQuizState extends State<CreateQuiz> {
                                     '${date.year}-${date.month}-${date.day}');
                               },
                                   currentTime: DateTime.now(),
-                                  locale: LocaleType.en);
+                                  locale: LocaleType.es);
                             },
                             child: Container(
                               alignment: Alignment.center,
@@ -211,6 +211,7 @@ class _CreateQuizState extends State<CreateQuiz> {
         borderRadius: BorderRadius.circular(20),
       ),
       child: TextFormField(
+        keyboardType: TextInputType.url,
         onChanged: (value) {
           context.read<EncuestaCubit>().onChangeLink(value);
         },

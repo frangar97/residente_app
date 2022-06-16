@@ -119,6 +119,7 @@ class _CreateExpenseState extends State<CreateExpense> {
         borderRadius: BorderRadius.circular(20),
       ),
       child: const TextField(
+        keyboardType: TextInputType.number,
         decoration: InputDecoration(
           hintStyle: subtitle2Style,
           hintText: 'Monto',

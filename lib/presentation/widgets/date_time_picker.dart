@@ -38,7 +38,7 @@ class _DateTimePickerState extends State<DateTimePicker> {
                 maxTime: DateTime(2022, 12, 31), onConfirm: (date) {
               _date = '${date.year} - ${date.month} - ${date.day}';
               setState(() {});
-            }, currentTime: DateTime.now(), locale: LocaleType.en);
+            }, currentTime: DateTime.now(), locale: LocaleType.es);
           },
           child: Container(
             alignment: Alignment.center,
