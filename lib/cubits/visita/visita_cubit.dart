@@ -16,6 +16,10 @@ class VisitaCubit extends Cubit<VisitaState> {
     emit(state.copyWith(tipoVisitaSeleccionado: tipoVisita));
   }
 
+  void seleccionarVisitaFrecuente(VisitaFrecuenteModel visita) {
+    emit(state.copyWith(visitaFrecuenteSeleccionada: visita));
+  }
+
   void onChangeNombre(String nombre) {
     emit(state.copyWith(nombre: nombre));
   }

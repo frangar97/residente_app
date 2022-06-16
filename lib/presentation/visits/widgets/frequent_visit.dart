@@ -33,7 +33,8 @@ class _FrequentVisitState extends State<FrequentVisit> {
                         ),
                         const DateTimePicker(),
                         const SizedBox(height: 30),
-                        ..._buildFrequentVisitItem(state.visitasFrecuentes),
+                        ..._buildFrequentVisitItem(
+                            context, state.visitasFrecuentes),
                       ],
                     ),
                   ],
@@ -43,9 +44,11 @@ class _FrequentVisitState extends State<FrequentVisit> {
     );
   }
 
-  List<Widget> _buildFrequentVisitItem(List<VisitaFrecuenteModel> visitas) {
+  List<Widget> _buildFrequentVisitItem(
+      BuildContext context, List<VisitaFrecuenteModel> visitas) {
     return List.from(visitas.map((e) => GestureDetector(
           onTap: () {
+            context.read<VisitaCubit>().seleccionarVisitaFrecuente(e);
             Navigator.pushNamed(context, 'info_frequent_visit');
           },
           child: Container(

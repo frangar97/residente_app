@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:residente_app/core/utils/style_constants.dart';
+import 'package:residente_app/cubits/visita/visita_cubit.dart';
 
 class InfoFrequentVisit extends StatefulWidget {
   const InfoFrequentVisit({Key? key}) : super(key: key);
@@ -86,63 +88,68 @@ class _InfoFrequentVisitState extends State<InfoFrequentVisit> {
   }
 
   Widget _buildFrequentVisitInfoItem() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        const Center(
-          child: Text(
-            'Eduardo Suarez',
-            style: headingStyle,
-          ),
-        ),
-        const SizedBox(
-          height: 30,
-        ),
-        RichText(
-          text: const TextSpan(
-            text: 'Tipo:',
-            style: subtitle2Style,
-            children: <TextSpan>[
-              TextSpan(
-                text: '\r Familiar',
-                style: subtitleStyle,
-              )
-            ],
-          ),
-        ),
-        const SizedBox(
-          height: 30,
-        ),
-        RichText(
-          overflow: TextOverflow.clip,
-          text: const TextSpan(
-            text: 'Dias:',
-            style: subtitle2Style,
-            children: <TextSpan>[
-              TextSpan(
-                text: '\rLunes, Martes, Miercoles, Jueves, Viernes',
-                style: subtitleStyle,
-              )
-            ],
-          ),
-        ),
-        const SizedBox(
-          height: 30,
-        ),
-        RichText(
-          overflow: TextOverflow.clip,
-          text: const TextSpan(
-            text: 'Nota:',
-            style: subtitle2Style,
-            children: <TextSpan>[
-              TextSpan(
-                text: '\rViene a cuidar a mi bebe.',
-                style: subtitleStyle,
-              )
-            ],
-          ),
-        ),
-      ],
+    return BlocBuilder<VisitaCubit, VisitaState>(
+      builder: (context, state) {
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Center(
+              child: Text(
+                state.visitaFrecuenteSeleccionada!.nombre,
+                style: headingStyle,
+              ),
+            ),
+            const SizedBox(
+              height: 30,
+            ),
+            RichText(
+              text: TextSpan(
+                text: 'Tipo:',
+                style: subtitle2Style,
+                children: <TextSpan>[
+                  TextSpan(
+                    text:
+                        '\r ${state.visitaFrecuenteSeleccionada!.tipoVisita.nombre}',
+                    style: subtitleStyle,
+                  )
+                ],
+              ),
+            ),
+            const SizedBox(
+              height: 30,
+            ),
+            RichText(
+              overflow: TextOverflow.clip,
+              text: const TextSpan(
+                text: 'Dias:',
+                style: subtitle2Style,
+                children: <TextSpan>[
+                  TextSpan(
+                    text: '\rLunes, Martes, Miercoles, Jueves, Viernes',
+                    style: subtitleStyle,
+                  )
+                ],
+              ),
+            ),
+            const SizedBox(
+              height: 30,
+            ),
+            RichText(
+              overflow: TextOverflow.clip,
+              text: TextSpan(
+                text: 'Nota:',
+                style: subtitle2Style,
+                children: <TextSpan>[
+                  TextSpan(
+                    text: '\r ${state.visitaFrecuenteSeleccionada!.notas}',
+                    style: subtitleStyle,
+                  )
+                ],
+              ),
+            ),
+          ],
+        );
+      },
     );
   }
 
