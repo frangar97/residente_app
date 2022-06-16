@@ -24,6 +24,13 @@ const heading2Style = TextStyle(
   height: 1.5,
 );
 
+const centerChartTextStyle = TextStyle(
+  fontSize: 45,
+  fontWeight: FontWeight.bold,
+  color: kPrimaryColor,
+  height: 1.5,
+);
+
 const subtitleStyle = TextStyle(
   fontSize: 18,
   fontWeight: FontWeight.bold,
@@ -45,6 +52,15 @@ const subtitle3Style = TextStyle(
 
 const textButtonStyle =
     TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white);
+
+const activeStyle = TextStyle(
+  fontSize: 18,
+  fontWeight: FontWeight.bold,
+  color: kPrimaryLightColor,
+  backgroundColor: Colors.green,
+  // background: Paint()..color = Colors.green,
+  height: 1.0,
+);
 
 const accountDivider = Divider(
   color: Colors.black,

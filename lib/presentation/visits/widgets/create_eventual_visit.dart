@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:residente_app/core/utils/style_constants.dart';
+import 'package:residente_app/presentation/visits/widgets/info_eventual_visit.dart';
 import 'package:residente_app/presentation/widgets/date_time_picker.dart';
 
 class CreateEventualVisit extends StatefulWidget {
@@ -10,6 +11,8 @@ class CreateEventualVisit extends StatefulWidget {
 }
 
 class _CreateEventualVisitState extends State<CreateEventualVisit> {
+  String? dropdownValue = null;
+  final TextEditingController _nombre = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -107,10 +110,6 @@ class _CreateEventualVisitState extends State<CreateEventualVisit> {
               const SizedBox(
                 height: 40,
               ),
-              _buildQrCode(),
-              const SizedBox(
-                height: 40,
-              ),
               _buildCenerateVisitButton(),
               const SizedBox(
                 height: 40,
@@ -123,7 +122,6 @@ class _CreateEventualVisitState extends State<CreateEventualVisit> {
   }
 
   Widget _buildVisitType() {
-    String dropdownValue = 'Familiar';
     return Container(
         padding: const EdgeInsets.only(
           left: 60,
@@ -164,8 +162,9 @@ class _CreateEventualVisitState extends State<CreateEventualVisit> {
         color: Colors.white,
         borderRadius: BorderRadius.circular(20),
       ),
-      child: const TextField(
-        decoration: InputDecoration(
+      child: TextField(
+        controller: _nombre,
+        decoration: const InputDecoration(
           hintStyle: subtitle2Style,
           hintText: 'Nombre',
           border: InputBorder.none,
@@ -187,69 +186,6 @@ class _CreateEventualVisitState extends State<CreateEventualVisit> {
           hintText: 'Nota',
           border: InputBorder.none,
           contentPadding: EdgeInsets.all(20),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildQrCode() {
-    return GestureDetector(
-      onTap: () {
-        showDialog(
-          context: context,
-          builder: (ctx) => AlertDialog(
-            backgroundColor: Colors.grey.shade200,
-            shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(Radius.circular(20.0))),
-            title: const Center(child: Text("Compartir:")),
-            content: _buildWhatsAppShare(),
-            actions: <Widget>[
-              TextButton(
-                onPressed: () {
-                  Navigator.of(ctx).pop();
-                },
-                child: const Text(
-                  "Ok",
-                  style: subtitleStyle,
-                ),
-              ),
-            ],
-            actionsPadding: EdgeInsets.zero,
-          ),
-        );
-      },
-      child: Center(
-        child: Container(
-          alignment: Alignment.topCenter,
-          height: MediaQuery.of(context).size.height * 0.2,
-          width: MediaQuery.of(context).size.width * 0.45,
-          decoration: const BoxDecoration(
-            image: DecorationImage(
-              fit: BoxFit.fill,
-              alignment: Alignment.topRight,
-              image: NetworkImage(
-                'https://qrcode.tec-it.com/API/QRCode?data=smsto%3A555-555-5555%3AGenerador+de+C%C3%B3digos+QR+de+TEC-IT',
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildWhatsAppShare() {
-    return Container(
-      margin: const EdgeInsets.only(left: 80, right: 80),
-      padding: const EdgeInsets.all(20),
-      alignment: Alignment.bottomCenter,
-      height: 75,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20),
-        image: const DecorationImage(
-          fit: BoxFit.scaleDown,
-          image: NetworkImage(
-            'https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/WhatsApp_logo-color-vertical.svg/2048px-WhatsApp_logo-color-vertical.svg.png',
-          ),
         ),
       ),
     );

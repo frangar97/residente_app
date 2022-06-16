@@ -82,6 +82,21 @@ class _ProfileBodyState extends State<ProfileBody> {
           ),
           RichText(
             text: const TextSpan(
+              text: 'Estado:',
+              style: subtitle2Style,
+              children: <TextSpan>[
+                TextSpan(
+                  text: ' Activo ',
+                  style: activeStyle,
+                )
+              ],
+            ),
+          ),
+          const SizedBox(
+            height: 30,
+          ),
+          RichText(
+            text: const TextSpan(
               text: 'Tipo:',
               style: subtitle2Style,
               children: <TextSpan>[
@@ -96,6 +111,7 @@ class _ProfileBodyState extends State<ProfileBody> {
             height: 30,
           ),
           RichText(
+            overflow: TextOverflow.ellipsis,
             text: const TextSpan(
               text: 'Direccion:',
               style: subtitle2Style,

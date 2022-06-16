@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:residente_app/presentation/admin/screen/admin_home_screen.dart';
 import 'package:residente_app/presentation/auth/screen/forgot_password_screen.dart';
 import 'package:residente_app/presentation/auth/screen/login_screen.dart';
+import 'package:residente_app/presentation/guard/menu/screens/guard_menu_screen.dart';
+import 'package:residente_app/presentation/guard/menu/widgets/part_visits.dart';
+import 'package:residente_app/presentation/guard/mobile_scanner/screens/QRScan_screen.dart';
 import 'package:residente_app/presentation/incidents/screens/incidents_screen.dart';
 import 'package:residente_app/presentation/incidents/widgets/create_incident.dart';
 import 'package:residente_app/presentation/incidents/widgets/info_incident.dart';
@@ -82,7 +85,7 @@ Map<String, WidgetBuilder> getAplicationRoutes() {
     "account_status": (_) => const AccountStatusScreen(),
     "visits": (_) => const VisitsScreen(),
     "info_frequent_visit": (_) => const InfoFrequentVisit(),
-    "info_eventual_visit": (_) => const InfoEventualVisit(),
+    "info_eventual_visit": (_) => InfoEventualVisit(),
     "create_eventual_visit": (_) => const CreateEventualVisit(),
     "create_frequent_visit": (_) => const CreateFrequentVisit(),
     "binnacle_visits": (_) => const BinaccleVisits(),
@@ -98,5 +101,8 @@ Map<String, WidgetBuilder> getAplicationRoutes() {
     "info_vehicle": (_) => const InfoVehicle(),
     "panic_alert": (_) => const PanicAlert(),
     "profile": (_) => const ProfileScreen(),
+    "guard_menu": (_) => const GuardMenuScreen(),
+    "part_visits": (_) => const PartVisits(),
+    "qr_scan": (_) => QRScan()
   };
 }

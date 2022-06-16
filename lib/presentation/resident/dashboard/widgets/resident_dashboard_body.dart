@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pie_chart/pie_chart.dart';
 import 'package:residente_app/core/utils/style_constants.dart';
 
 class ResidentDashboardBody extends StatefulWidget {
@@ -9,6 +10,20 @@ class ResidentDashboardBody extends StatefulWidget {
 }
 
 class _ResidentDashboardBodyState extends State<ResidentDashboardBody> {
+  final dataMap = <String, double>{
+    "Pendiente": 1,
+  };
+
+  final colorList = <Color>[
+    Colors.orange.shade600,
+  ];
+
+  final gradientList = <Color>[
+    const Color(0xFFFFA53E),
+    const Color(0xFFFF7643)
+  ];
+
+  int key = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,14 +72,14 @@ class _ResidentDashboardBodyState extends State<ResidentDashboardBody> {
           Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              const SizedBox(height: 50),
+              const SizedBox(height: 30),
               const Text(
                 'Calle A #100',
                 style: headingStyle,
               ),
-              const SizedBox(height: 50),
+              const SizedBox(height: 30),
               _buildPaymentInfoItem(),
-              const SizedBox(height: 50),
+              const SizedBox(height: 20),
               const Divider(
                 color: Colors.black,
                 height: 30,
@@ -72,7 +87,7 @@ class _ResidentDashboardBodyState extends State<ResidentDashboardBody> {
                 indent: 130,
                 thickness: 1,
               ),
-              const SizedBox(height: 50),
+              const SizedBox(height: 20),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -124,12 +139,8 @@ class _ResidentDashboardBodyState extends State<ResidentDashboardBody> {
                     )
                   ]))),
               const SizedBox(height: 30),
-              const Center(
-                child: Text(
-                  '0',
-                  style: heading2Style,
-                ),
-              ),
+              _buildPendingPaymentChart(),
+              // ),
               const SizedBox(height: 20),
               const Divider(
                 color: Colors.black,
@@ -246,6 +257,38 @@ class _ResidentDashboardBodyState extends State<ResidentDashboardBody> {
                   overflow: TextOverflow.ellipsis,
                 )
               ])),
+    );
+  }
+
+  Widget _buildPendingPaymentChart() {
+    return PieChart(
+      dataMap: dataMap,
+      animationDuration: const Duration(milliseconds: 800),
+      chartLegendSpacing: 32,
+      chartRadius: MediaQuery.of(context).size.width * 0.4,
+      // colorList: colorList,
+      initialAngleInDegree: 0,
+      chartType: ChartType.ring,
+      ringStrokeWidth: 6,
+      centerText: "1",
+      gradientList: [gradientList],
+      centerTextStyle: centerChartTextStyle,
+      legendOptions: const LegendOptions(
+        showLegendsInRow: false,
+        legendPosition: LegendPosition.right,
+        showLegends: false,
+        legendShape: BoxShape.circle,
+        legendTextStyle: TextStyle(
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+      chartValuesOptions: const ChartValuesOptions(
+        showChartValueBackground: false,
+        showChartValues: false,
+        showChartValuesInPercentage: false,
+        showChartValuesOutside: false,
+        decimalPlaces: 2,
+      ),
     );
   }
 }

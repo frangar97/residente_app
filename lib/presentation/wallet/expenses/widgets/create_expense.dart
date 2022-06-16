@@ -156,8 +156,8 @@ class _CreateExpenseState extends State<CreateExpense> {
           style: subtitle2Style,
         ),
         Container(
-          height: MediaQuery.of(context).size.height * 0.09,
-          width: MediaQuery.of(context).size.width * 0.2,
+          height: 65,
+          width: 65,
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(20),

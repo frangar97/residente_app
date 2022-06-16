@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:residente_app/core/utils/style_constants.dart';
 
-class ResidentModuleCard extends StatelessWidget {
+class GuardModuleCard extends StatelessWidget {
   final String nombre;
   final String ruta;
   final IconData icon;
-  const ResidentModuleCard(
+  const GuardModuleCard(
       {Key? key, required this.nombre, required this.ruta, required this.icon})
       : super(key: key);
 
@@ -32,13 +32,13 @@ class ResidentModuleCard extends StatelessWidget {
                     height: 30,
                   ),
                   const Text(
-                    'Pagos',
+                    'Visitas',
                     style: subtitleStyle,
                   ),
                   const SizedBox(height: 20),
                   _buildVisitsItem(context),
                   const SizedBox(height: 10),
-                  _buildBinnacleVisitsItem(context),
+                  _buildPartVisitsItem(context),
                   const SizedBox(
                     height: 30,
                   ),
@@ -120,10 +120,10 @@ class ResidentModuleCard extends StatelessWidget {
     );
   }
 
-  Widget _buildBinnacleVisitsItem(context) {
+  Widget _buildPartVisitsItem(context) {
     return GestureDetector(
       onTap: () {
-        Navigator.pushNamed(context, 'binnacle_visits');
+        Navigator.pushNamed(context, 'part_visits');
       },
       child: Container(
         decoration: BoxDecoration(
@@ -142,7 +142,7 @@ class ResidentModuleCard extends StatelessWidget {
         child: const ListTile(
             leading: Icon(Icons.list_alt_rounded),
             title: Text(
-              'Bitacora de Visitas',
+              'Despedir Visitas',
               style: subtitleStyle,
             ),
             trailing: Icon(

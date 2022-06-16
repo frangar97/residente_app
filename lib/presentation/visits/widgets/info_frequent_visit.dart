@@ -52,78 +52,97 @@ class _InfoFrequentVisitState extends State<InfoFrequentVisit> {
 
   Widget _buildBody() {
     return ListView(
+      padding: const EdgeInsets.only(left: 30, right: 30),
       shrinkWrap: true,
       children: <Widget>[
         const SizedBox(height: 30),
         _buildAttachedFile(),
         const SizedBox(height: 30),
         _buildFrequentVisitInfoItem(),
-        const SizedBox(height: 90),
-        _buildAprovedRejectButtons(),
+        const SizedBox(height: 20),
+        _buildQrCode(),
+        const SizedBox(height: 30),
+        _buildReceiveButtons(),
+        const SizedBox(height: 30),
       ],
     );
   }
 
-  Widget _buildFrequentVisitInfoItem() {
-    return Padding(
-      padding: const EdgeInsets.only(left: 50, right: 50),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        // verticalDirection: VerticalDirection.down,
-        children: <Widget>[
-          const Center(
-            child: Text(
-              'Eduardo Suarez',
-              style: headingStyle,
-            ),
+  Widget _buildQrCode() {
+    return Container(
+      margin: const EdgeInsets.all(40),
+      alignment: Alignment.topCenter,
+      height: MediaQuery.of(context).size.height * 0.3,
+      decoration: const BoxDecoration(
+        image: DecorationImage(
+          fit: BoxFit.fill,
+          alignment: Alignment.center,
+          image: NetworkImage(
+            'https://qrcode.tec-it.com/API/QRCode?data=smsto%3A555-555-5555%3AGenerador+de+C%C3%B3digos+QR+de+TEC-IT',
           ),
-          const SizedBox(
-            height: 30,
-          ),
-          RichText(
-            text: const TextSpan(
-              text: 'Tipo:',
-              style: subtitle2Style,
-              children: <TextSpan>[
-                TextSpan(
-                  text: '\r Familiar',
-                  style: subtitleStyle,
-                )
-              ],
-            ),
-          ),
-          const SizedBox(
-            height: 30,
-          ),
-          RichText(
-            text: const TextSpan(
-              text: 'Dias:',
-              style: subtitle2Style,
-              children: <TextSpan>[
-                TextSpan(
-                  text: '\rLunes, Martes, Miercoles, Jueves, Viernes',
-                  style: subtitleStyle,
-                )
-              ],
-            ),
-          ),
-          const SizedBox(
-            height: 30,
-          ),
-          RichText(
-            text: const TextSpan(
-              text: 'Nota:',
-              style: subtitle2Style,
-              children: <TextSpan>[
-                TextSpan(
-                  text: '\rViene a cuidar a mi bebe.',
-                  style: subtitleStyle,
-                )
-              ],
-            ),
-          ),
-        ],
+        ),
       ),
+    );
+  }
+
+  Widget _buildFrequentVisitInfoItem() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        const Center(
+          child: Text(
+            'Eduardo Suarez',
+            style: headingStyle,
+          ),
+        ),
+        const SizedBox(
+          height: 30,
+        ),
+        RichText(
+          text: const TextSpan(
+            text: 'Tipo:',
+            style: subtitle2Style,
+            children: <TextSpan>[
+              TextSpan(
+                text: '\r Familiar',
+                style: subtitleStyle,
+              )
+            ],
+          ),
+        ),
+        const SizedBox(
+          height: 30,
+        ),
+        RichText(
+          overflow: TextOverflow.clip,
+          text: const TextSpan(
+            text: 'Dias:',
+            style: subtitle2Style,
+            children: <TextSpan>[
+              TextSpan(
+                text: '\rLunes, Martes, Miercoles, Jueves, Viernes',
+                style: subtitleStyle,
+              )
+            ],
+          ),
+        ),
+        const SizedBox(
+          height: 30,
+        ),
+        RichText(
+          overflow: TextOverflow.clip,
+          text: const TextSpan(
+            text: 'Nota:',
+            style: subtitle2Style,
+            children: <TextSpan>[
+              TextSpan(
+                text: '\rViene a cuidar a mi bebe.',
+                style: subtitleStyle,
+              )
+            ],
+          ),
+        ),
+      ],
     );
   }
 
@@ -144,62 +163,31 @@ class _InfoFrequentVisitState extends State<InfoFrequentVisit> {
     );
   }
 
-  Widget _buildAprovedRejectButtons() {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
-      children: [
-        TextButton(
-          onPressed: () {},
-          child: const Text(
-            'Rechazar',
-            style: subtitleStyle,
-          ),
-          style: ButtonStyle(
-            padding: MaterialStateProperty.all(
-              const EdgeInsets.only(
-                left: 30,
-                right: 30,
-                top: 10,
-                bottom: 10,
-              ),
-            ),
-            shape: MaterialStateProperty.all(
-              RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(15.0),
-              ),
-            ),
-            backgroundColor: MaterialStateProperty.all(
-              Colors.grey.shade300,
-            ),
+  Widget _buildReceiveButtons() {
+    return TextButton(
+      onPressed: () {},
+      child: const Text(
+        'Recibir',
+        style: textButtonStyle,
+      ),
+      style: ButtonStyle(
+        padding: MaterialStateProperty.all(
+          const EdgeInsets.only(
+            left: 30,
+            right: 30,
+            top: 10,
+            bottom: 10,
           ),
         ),
-        TextButton(
-          onPressed: () {},
-          child: const Text(
-            'Aprobar',
-            style: textButtonStyle,
-          ),
-          style: ButtonStyle(
-            padding: MaterialStateProperty.all(
-              const EdgeInsets.only(
-                left: 30,
-                right: 30,
-                top: 10,
-                bottom: 10,
-              ),
-            ),
-            shape: MaterialStateProperty.all(
-              RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(15.0),
-              ),
-            ),
-            backgroundColor: MaterialStateProperty.all(
-              Colors.orange.shade600,
-            ),
+        shape: MaterialStateProperty.all(
+          RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15.0),
           ),
         ),
-      ],
+        backgroundColor: MaterialStateProperty.all(
+          Colors.orange.shade600,
+        ),
+      ),
     );
   }
 }
