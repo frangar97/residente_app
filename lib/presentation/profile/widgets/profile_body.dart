@@ -18,7 +18,19 @@ class _ProfileBodyState extends State<ProfileBody> {
         preferredSize: const Size.fromHeight(60.0),
         child: _buildAppBar(),
       ),
-      body: _buildBody(),
+      body: Center(
+        child: ListView(
+          padding: const EdgeInsets.all(30),
+          children: [
+            Container(
+              padding: const EdgeInsets.only(top: 20, bottom: 40),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20), color: Colors.white),
+              child: _buildBody(),
+            ),
+          ],
+        ),
+      ),
     );
   }
 
@@ -52,94 +64,100 @@ class _ProfileBodyState extends State<ProfileBody> {
 
   Widget _buildBody() {
     return ListView(
+      padding: const EdgeInsets.only(left: 30, right: 30),
       shrinkWrap: true,
       children: <Widget>[
         const SizedBox(height: 30),
         _buildProfilePhoto(),
         const SizedBox(height: 30),
         _buildProfileInfo(),
-        const SizedBox(height: 90),
-        _buildAprovedRejectButtons(),
+        const SizedBox(height: 40),
+        const Divider(
+          color: Colors.black,
+          height: 30,
+          endIndent: 130,
+          indent: 130,
+          thickness: 1,
+        ),
+        const SizedBox(height: 40),
+        _buildChangePassword(),
       ],
     );
   }
 
   Widget _buildProfileInfo() {
-    return Padding(
-      padding: const EdgeInsets.only(left: 50, right: 50),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        // verticalDirection: VerticalDirection.down,
-        children: <Widget>[
-          const Center(
-            child: Text(
-              'Casa A #100',
-              style: headingStyle,
-            ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      // verticalDirection: VerticalDirection.down,
+      children: <Widget>[
+        const Center(
+          child: Text(
+            'Casa A #100',
+            style: headingStyle,
           ),
-          const SizedBox(
-            height: 30,
+        ),
+        const SizedBox(
+          height: 30,
+        ),
+        RichText(
+          text: const TextSpan(
+            text: 'Estado:',
+            style: subtitle2Style,
+            children: <TextSpan>[
+              TextSpan(
+                text: '\rActivo',
+                style: activeStyle,
+              )
+            ],
           ),
-          RichText(
-            text: const TextSpan(
-              text: 'Estado:',
-              style: subtitle2Style,
-              children: <TextSpan>[
-                TextSpan(
-                  text: ' Activo ',
-                  style: activeStyle,
-                )
-              ],
-            ),
+        ),
+        const SizedBox(
+          height: 30,
+        ),
+        RichText(
+          text: const TextSpan(
+            text: 'Tipo:',
+            style: subtitle2Style,
+            children: <TextSpan>[
+              TextSpan(
+                text: '\r Residente',
+                style: subtitleStyle,
+              )
+            ],
           ),
-          const SizedBox(
-            height: 30,
+        ),
+        const SizedBox(
+          height: 30,
+        ),
+        RichText(
+          overflow: TextOverflow.visible,
+          text: const TextSpan(
+            text: 'Direccion:',
+            style: subtitle2Style,
+            children: <TextSpan>[
+              TextSpan(
+                text: '\rCasa A #100, bloque C-1',
+                style: subtitleStyle,
+              )
+            ],
           ),
-          RichText(
-            text: const TextSpan(
-              text: 'Tipo:',
-              style: subtitle2Style,
-              children: <TextSpan>[
-                TextSpan(
-                  text: '\r Residente',
-                  style: subtitleStyle,
-                )
-              ],
-            ),
+        ),
+        const SizedBox(
+          height: 30,
+        ),
+        RichText(
+          text: const TextSpan(
+            text: 'Telefono:',
+            style: subtitle2Style,
+            children: <TextSpan>[
+              TextSpan(
+                text: '\r97659023',
+                style: subtitleStyle,
+              )
+            ],
           ),
-          const SizedBox(
-            height: 30,
-          ),
-          RichText(
-            overflow: TextOverflow.ellipsis,
-            text: const TextSpan(
-              text: 'Direccion:',
-              style: subtitle2Style,
-              children: <TextSpan>[
-                TextSpan(
-                  text: '\rCasa A #100, bloque C-1',
-                  style: subtitleStyle,
-                )
-              ],
-            ),
-          ),
-          const SizedBox(
-            height: 30,
-          ),
-          RichText(
-            text: const TextSpan(
-              text: 'Telefono:',
-              style: subtitle2Style,
-              children: <TextSpan>[
-                TextSpan(
-                  text: '\r97659023',
-                  style: subtitleStyle,
-                )
-              ],
-            ),
-          ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 
@@ -160,7 +178,7 @@ class _ProfileBodyState extends State<ProfileBody> {
     );
   }
 
-  Widget _buildAprovedRejectButtons() {
+  Widget _buildChangePassword() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
@@ -171,13 +189,8 @@ class _ProfileBodyState extends State<ProfileBody> {
             style: textButtonStyle,
           ),
           style: ButtonStyle(
-            padding: MaterialStateProperty.all(
-              const EdgeInsets.only(
-                left: 30,
-                right: 30,
-                top: 10,
-                bottom: 10,
-              ),
+            fixedSize: MaterialStateProperty.all(
+              Size(MediaQuery.of(context).size.width, 40),
             ),
             shape: MaterialStateProperty.all(
               RoundedRectangleBorder(

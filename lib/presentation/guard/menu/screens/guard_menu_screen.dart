@@ -18,7 +18,7 @@ final nombre = [
 ];
 
 final ruta = [
-  'users',
+  'chat',
   'visits',
 ];
 

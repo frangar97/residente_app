@@ -128,7 +128,7 @@ class _InfoResidentPaymentBodyState extends State<InfoResidentPaymentBody> {
               thickness: 1,
             ),
             const SizedBox(
-              height: 20,
+              height: 10,
             ),
             _buildPaymentDate(),
           ],

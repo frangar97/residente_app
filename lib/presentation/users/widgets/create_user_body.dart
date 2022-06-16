@@ -69,13 +69,8 @@ class _CreateUserBodyState extends State<CreateUserBody> {
         style: textButtonStyle,
       ),
       style: ButtonStyle(
-        padding: MaterialStateProperty.all(
-          const EdgeInsets.only(
-            left: 30,
-            right: 30,
-            top: 10,
-            bottom: 10,
-          ),
+        fixedSize: MaterialStateProperty.all(
+          Size(MediaQuery.of(context).size.width, 40),
         ),
         shape: MaterialStateProperty.all(
           RoundedRectangleBorder(

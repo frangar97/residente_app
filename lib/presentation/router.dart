@@ -2,12 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:residente_app/presentation/admin/screen/admin_home_screen.dart';
 import 'package:residente_app/presentation/auth/screen/forgot_password_screen.dart';
 import 'package:residente_app/presentation/auth/screen/login_screen.dart';
+import 'package:residente_app/presentation/chat/screens/chat_screen.dart';
+import 'package:residente_app/presentation/chat/widgets/chat_with_body.dart';
 import 'package:residente_app/presentation/guard/menu/screens/guard_menu_screen.dart';
 import 'package:residente_app/presentation/guard/menu/widgets/part_visits.dart';
 import 'package:residente_app/presentation/guard/mobile_scanner/screens/QRScan_screen.dart';
 import 'package:residente_app/presentation/incidents/screens/incidents_screen.dart';
 import 'package:residente_app/presentation/incidents/widgets/create_incident.dart';
 import 'package:residente_app/presentation/incidents/widgets/info_incident.dart';
+import 'package:residente_app/presentation/panic_alert/screens/panic_alert_screen.dart';
 import 'package:residente_app/presentation/payments/charges/screens/charges_screen.dart';
 import 'package:residente_app/presentation/payments/charges/screens/create_charges_screen.dart';
 import 'package:residente_app/presentation/payments/charges/widgets/info_charge.dart';
@@ -25,7 +28,6 @@ import 'package:residente_app/presentation/reservations/widgets/create_reservati
 import 'package:residente_app/presentation/reservations/widgets/info_reservation.dart';
 import 'package:residente_app/presentation/resident/dashboard/screens/resident_dashboard.dart';
 import 'package:residente_app/presentation/resident/menu/screen/resident_menu_screen.dart';
-import 'package:residente_app/presentation/resident/panic_alert/screens/panic_alert_screen.dart';
 import 'package:residente_app/presentation/resident/payments/widgets/info_payment_body.dart';
 import 'package:residente_app/presentation/resident/payments/widgets/info_pending_payment.dart';
 import 'package:residente_app/presentation/resident/payments/widgets/pending_payment.dart';
@@ -91,6 +93,8 @@ Map<String, WidgetBuilder> getAplicationRoutes() {
     "binnacle_visits": (_) => const BinaccleVisits(),
     "resident_payment_dashboard": (_) => const ResidentDashboard(),
     "resident_menu": (_) => const ResidentMenuScreen(),
+    "chat": (_) => const ChatScreen(),
+    "chat_with": (_) => const ChatWithBody(),
     "payments": (_) => const PaymentsScreen(),
     "info_payments_resident": (_) => const InfoResidentPaymentBody(),
     "pending_payment": (_) => const PendingPayment(),
@@ -99,10 +103,10 @@ Map<String, WidgetBuilder> getAplicationRoutes() {
     "vehicles": (_) => const VehiclesScreen(),
     "create_vehicle": (_) => const CreateVehicle(),
     "info_vehicle": (_) => const InfoVehicle(),
-    "panic_alert": (_) => const PanicAlert(),
+    "panic_alert": (_) => const PanicAlertScreen(),
     "profile": (_) => const ProfileScreen(),
     "guard_menu": (_) => const GuardMenuScreen(),
     "part_visits": (_) => const PartVisits(),
-    "qr_scan": (_) => QRScan()
+    "qr_scan": (_) => QRScan(),
   };
 }

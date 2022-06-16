@@ -52,6 +52,7 @@ class _InfoReservationState extends State<InfoReservation> {
 
   Widget _buildBody() {
     return ListView(
+      padding: const EdgeInsets.only(left: 30, right: 30),
       shrinkWrap: true,
       children: <Widget>[
         const SizedBox(height: 30),
@@ -80,38 +81,32 @@ class _InfoReservationState extends State<InfoReservation> {
         const SizedBox(
           height: 30,
         ),
-        Padding(
-          padding: const EdgeInsets.only(left: 60, right: 60),
-          child: RichText(
-            text: const TextSpan(
-              text: 'Lugar:',
-              style: subtitle2Style,
-              children: <TextSpan>[
-                TextSpan(
-                  text: '\n\nQuiosco, Parque Calle A, Residencial Toledo',
-                  style: subtitleStyle,
-                )
-              ],
-            ),
+        RichText(
+          text: const TextSpan(
+            text: 'Lugar:',
+            style: subtitle2Style,
+            children: <TextSpan>[
+              TextSpan(
+                text: '\n\nQuiosco, Parque Calle A, Residencial Toledo',
+                style: subtitleStyle,
+              )
+            ],
           ),
         ),
         const SizedBox(
           height: 30,
         ),
-        Padding(
-          padding: const EdgeInsets.only(left: 60, right: 60),
-          child: RichText(
-            text: const TextSpan(
-              text: 'Descripcion:',
-              style: subtitle2Style,
-              children: <TextSpan>[
-                TextSpan(
-                  text:
-                      '\n\nHola, necesito reservar el quiosco del parquecito de la calle A el dia martes de la proxima semana, por dos horas, es para un kermes de mi hijo.',
-                  style: subtitleStyle,
-                )
-              ],
-            ),
+        RichText(
+          text: const TextSpan(
+            text: 'Descripcion:',
+            style: subtitle2Style,
+            children: <TextSpan>[
+              TextSpan(
+                text:
+                    '\n\nHola, necesito reservar el quiosco del parquecito de la calle A el dia martes de la proxima semana, por dos horas, es para un kermes de mi hijo.',
+                style: subtitleStyle,
+              )
+            ],
           ),
         ),
       ],
@@ -151,13 +146,8 @@ class _InfoReservationState extends State<InfoReservation> {
             style: subtitleStyle,
           ),
           style: ButtonStyle(
-            padding: MaterialStateProperty.all(
-              const EdgeInsets.only(
-                left: 30,
-                right: 30,
-                top: 10,
-                bottom: 10,
-              ),
+            fixedSize: MaterialStateProperty.all(
+              const Size(140, 40),
             ),
             shape: MaterialStateProperty.all(
               RoundedRectangleBorder(
@@ -176,13 +166,8 @@ class _InfoReservationState extends State<InfoReservation> {
             style: textButtonStyle,
           ),
           style: ButtonStyle(
-            padding: MaterialStateProperty.all(
-              const EdgeInsets.only(
-                left: 30,
-                right: 30,
-                top: 10,
-                bottom: 10,
-              ),
+            fixedSize: MaterialStateProperty.all(
+              const Size(140, 40),
             ),
             shape: MaterialStateProperty.all(
               RoundedRectangleBorder(

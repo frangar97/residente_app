@@ -1,3 +1,4 @@
+import 'package:bubble/bubble.dart';
 import 'package:flutter/material.dart';
 
 const kPrimaryColor = Colors.black87;
@@ -56,9 +57,7 @@ const textButtonStyle =
 const activeStyle = TextStyle(
   fontSize: 18,
   fontWeight: FontWeight.bold,
-  color: kPrimaryLightColor,
-  backgroundColor: Colors.green,
-  // background: Paint()..color = Colors.green,
+  color: Colors.green,
   height: 1.0,
 );
 
@@ -97,3 +96,19 @@ OutlineInputBorder outlineInputBorder() {
     borderSide: BorderSide(color: Colors.orange.shade600),
   );
 }
+
+const styleSomebody = BubbleStyle(
+  nip: BubbleNip.leftCenter,
+  color: Colors.white,
+  elevation: 4,
+  margin: BubbleEdges.only(top: 8, right: 50),
+  alignment: Alignment.topLeft,
+);
+
+final styleMe = BubbleStyle(
+  nip: BubbleNip.rightCenter,
+  color: Colors.blue.shade100,
+  elevation: 4,
+  margin: const BubbleEdges.only(top: 8, left: 50),
+  alignment: Alignment.topRight,
+);
