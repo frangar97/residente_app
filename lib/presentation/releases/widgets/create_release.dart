@@ -119,7 +119,7 @@ class _CreateReleaseState extends State<CreateRelease> {
                                     '${date.year}-${date.month}-${date.day}');
                               },
                                   currentTime: DateTime.now(),
-                                  locale: LocaleType.en);
+                                  locale: LocaleType.es);
                             },
                             child: Container(
                               alignment: Alignment.center,

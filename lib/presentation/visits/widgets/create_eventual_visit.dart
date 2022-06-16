@@ -128,7 +128,7 @@ class _CreateEventualVisitState extends State<CreateEventualVisit> {
                                   '${date.year}-${date.month}-${date.day}');
                             },
                                 currentTime: DateTime.now(),
-                                locale: LocaleType.en);
+                                locale: LocaleType.es);
                           },
                           child: Container(
                             alignment: Alignment.center,

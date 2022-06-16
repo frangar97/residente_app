@@ -117,7 +117,7 @@ class _CreateIncidentState extends State<CreateIncident> {
                                     '${date.year}-${date.month}-${date.day}');
                               },
                                   currentTime: DateTime.now(),
-                                  locale: LocaleType.en);
+                                  locale: LocaleType.es);
                             },
                             child: Container(
                               alignment: Alignment.center,
