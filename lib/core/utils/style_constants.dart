@@ -1,3 +1,4 @@
+import 'package:bubble/bubble.dart';
 import 'package:flutter/material.dart';
 
 const kPrimaryColor = Colors.black87;
@@ -24,6 +25,13 @@ const heading2Style = TextStyle(
   height: 1.5,
 );
 
+const centerChartTextStyle = TextStyle(
+  fontSize: 45,
+  fontWeight: FontWeight.bold,
+  color: kPrimaryColor,
+  height: 1.5,
+);
+
 const subtitleStyle = TextStyle(
   fontSize: 18,
   fontWeight: FontWeight.bold,
@@ -45,6 +53,13 @@ const subtitle3Style = TextStyle(
 
 const textButtonStyle =
     TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white);
+
+const activeStyle = TextStyle(
+  fontSize: 18,
+  fontWeight: FontWeight.bold,
+  color: Colors.green,
+  height: 1.0,
+);
 
 const accountDivider = Divider(
   color: Colors.black,
@@ -81,3 +96,19 @@ OutlineInputBorder outlineInputBorder() {
     borderSide: BorderSide(color: Colors.orange.shade600),
   );
 }
+
+const styleSomebody = BubbleStyle(
+  nip: BubbleNip.leftCenter,
+  color: Colors.white,
+  elevation: 4,
+  margin: BubbleEdges.only(top: 8, right: 50),
+  alignment: Alignment.topLeft,
+);
+
+final styleMe = BubbleStyle(
+  nip: BubbleNip.rightCenter,
+  color: Colors.blue.shade100,
+  elevation: 4,
+  margin: const BubbleEdges.only(top: 8, left: 50),
+  alignment: Alignment.topRight,
+);

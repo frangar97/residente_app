@@ -110,14 +110,14 @@ class _VisitsBodyState extends State<VisitsBody> {
         elevation: 0.0,
       ),
       pages: const [
-        FrequentVisit(),
         EventualVisit(),
+        FrequentVisit(),
       ],
       items: const [
         ScrollNavigationItem(
-            title: 'Frecuente', icon: Icon(Icons.fact_check_outlined)),
-        ScrollNavigationItem(
             title: 'Eventual', icon: Icon(Icons.access_time_outlined)),
+        ScrollNavigationItem(
+            title: 'Frecuente', icon: Icon(Icons.fact_check_outlined)),
       ],
     );
   }

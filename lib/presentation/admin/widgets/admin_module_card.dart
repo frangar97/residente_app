@@ -63,7 +63,7 @@ class AdminModuleCard extends StatelessWidget {
                     height: 30,
                   ),
                   const Text(
-                    'Pagos',
+                    'Cartera',
                     style: subtitleStyle,
                   ),
                   const SizedBox(height: 20),
@@ -98,7 +98,7 @@ class AdminModuleCard extends StatelessWidget {
                     height: 30,
                   ),
                   const Text(
-                    'Pagos',
+                    'Visitas',
                     style: subtitleStyle,
                   ),
                   const SizedBox(height: 20),

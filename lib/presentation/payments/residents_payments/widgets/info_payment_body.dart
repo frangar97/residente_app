@@ -259,13 +259,8 @@ class _InfoPaymentBodyState extends State<InfoPaymentBody> {
             style: subtitleStyle,
           ),
           style: ButtonStyle(
-            padding: MaterialStateProperty.all(
-              const EdgeInsets.only(
-                left: 30,
-                right: 30,
-                top: 10,
-                bottom: 10,
-              ),
+            fixedSize: MaterialStateProperty.all(
+              const Size(140, 40),
             ),
             shape: MaterialStateProperty.all(
               RoundedRectangleBorder(
@@ -284,13 +279,8 @@ class _InfoPaymentBodyState extends State<InfoPaymentBody> {
             style: textButtonStyle,
           ),
           style: ButtonStyle(
-            padding: MaterialStateProperty.all(
-              const EdgeInsets.only(
-                left: 30,
-                right: 30,
-                top: 10,
-                bottom: 10,
-              ),
+            fixedSize: MaterialStateProperty.all(
+              const Size(140, 40),
             ),
             shape: MaterialStateProperty.all(
               RoundedRectangleBorder(

@@ -27,7 +27,7 @@ final nombre = [
 
 final ruta = [
   'resident_payment_dashboard',
-  'users',
+  'chat',
   'visits',
   'reservations',
   'vehicles',

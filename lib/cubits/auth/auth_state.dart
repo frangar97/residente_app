@@ -9,24 +9,26 @@ class AuthState extends Equatable {
 
   final FormSubmissionStatus formStatus;
 
-  const AuthState({
-    this.email = '',
-    this.password = '',
-    this.formStatus = const InitialFormStatus(),
-  });
+  final AuthModel? usuario;
 
-  AuthState copyWith({
-    String? email,
-    String? password,
-    FormSubmissionStatus? formStatus,
-  }) {
+  const AuthState(
+      {this.email = '',
+      this.password = '',
+      this.formStatus = const InitialFormStatus(),
+      this.usuario});
+
+  AuthState copyWith(
+      {String? email,
+      String? password,
+      FormSubmissionStatus? formStatus,
+      AuthModel? usuario}) {
     return AuthState(
-      email: email ?? this.email,
-      password: password ?? this.password,
-      formStatus: formStatus ?? this.formStatus,
-    );
+        email: email ?? this.email,
+        password: password ?? this.password,
+        formStatus: formStatus ?? this.formStatus,
+        usuario: usuario ?? this.usuario);
   }
 
   @override
-  List<Object?> get props => [email, password, formStatus];
+  List<Object?> get props => [email, password, formStatus, usuario];
 }

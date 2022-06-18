@@ -117,7 +117,7 @@ class _CreateIncidentState extends State<CreateIncident> {
                                     '${date.year}-${date.month}-${date.day}');
                               },
                                   currentTime: DateTime.now(),
-                                  locale: LocaleType.en);
+                                  locale: LocaleType.es);
                             },
                             child: Container(
                               alignment: Alignment.center,
@@ -299,13 +299,8 @@ class _CreateIncidentState extends State<CreateIncident> {
         style: textButtonStyle,
       ),
       style: ButtonStyle(
-        padding: MaterialStateProperty.all(
-          const EdgeInsets.only(
-            left: 30,
-            right: 30,
-            top: 10,
-            bottom: 10,
-          ),
+        fixedSize: MaterialStateProperty.all(
+          Size(MediaQuery.of(context).size.width, 40),
         ),
         shape: MaterialStateProperty.all(
           RoundedRectangleBorder(

@@ -4,6 +4,7 @@ import "package:residente_app/dependency_injection/injection_container.dart"
     as di;
 import 'package:residente_app/presentation/router.dart';
 import 'package:residente_app/state_provider.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -18,9 +19,15 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return StateProvider(
       child: MaterialApp(
+          localizationsDelegates: const [
+            GlobalMaterialLocalizations.delegate
+          ],
+          supportedLocales: const [
+            Locale('es', 'HN'),
+          ],
           debugShowCheckedModeBanner: false,
           title: kAppTitle,
-          initialRoute: "auth_login",
+          initialRoute: "admin_home",
           routes: getAplicationRoutes()),
     );
   }

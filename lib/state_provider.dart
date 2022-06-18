@@ -4,6 +4,7 @@ import 'package:residente_app/cubits/auth/auth_cubit.dart';
 import 'package:residente_app/cubits/comunicado/comunicado_cubit.dart';
 import 'package:residente_app/cubits/encuesta/encuesta_cubit.dart';
 import 'package:residente_app/cubits/incidente/incidente_cubit.dart';
+import 'package:residente_app/cubits/visita/visita_cubit.dart';
 import "package:residente_app/dependency_injection/injection_container.dart"
     as di;
 
@@ -19,6 +20,7 @@ class StateProvider extends StatelessWidget {
           create: (_) => ComunicadoCubit(comunicadoRepository: di.sl())),
       BlocProvider(create: (_) => IncidenteCubit(incidenteRepository: di.sl())),
       BlocProvider(create: (_) => EncuestaCubit(encuestaRepository: di.sl())),
+      BlocProvider(create: (_) => VisitaCubit(visitaRepository: di.sl())),
     ], child: child);
   }
 }

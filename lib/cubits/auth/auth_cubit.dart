@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:residente_app/cubits/auth/form_submission_status.dart';
+import 'package:residente_app/features/auth/auth_model.dart';
 import 'package:residente_app/features/auth/auth_repository.dart';
 
 part 'auth_state.dart';
@@ -23,7 +24,9 @@ class AuthCubit extends Cubit<AuthState> {
   Future<void> login() async {
     emit(state.copyWith(formStatus: FormSubmitting()));
     final result = await _authRepository.login(state.email, state.password);
-    result.fold((l) => emit(state.copyWith(formStatus: SubmissionFailed())),
-        (r) => emit(state.copyWith(formStatus: SubmissionSuccess())));
+    result.fold(
+        (l) => emit(state.copyWith(formStatus: SubmissionFailed())),
+        (r) =>
+            emit(state.copyWith(formStatus: SubmissionSuccess(), usuario: r)));
   }
 }

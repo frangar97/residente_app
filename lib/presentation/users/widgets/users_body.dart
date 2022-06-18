@@ -9,6 +9,14 @@ class UsersBody extends StatefulWidget {
 }
 
 class _UsersBodyState extends State<UsersBody> {
+  bool active = true;
+
+  @override
+  void initState() {
+    active = true;
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -67,59 +75,50 @@ class _UsersBodyState extends State<UsersBody> {
   }
 
   Widget _buildBody() {
-    return ListView(children: [
-      Column(
-        children: <Widget>[
-          const SizedBox(
-            height: 15,
-          ),
-          Container(
-            margin: const EdgeInsets.only(
-              left: 20,
-              right: 20,
-              top: 15,
-              bottom: 15,
-            ),
-            child: TextField(
-              onChanged: (value) {},
-              decoration: const InputDecoration(
-                fillColor: Colors.white,
-                filled: true,
-                labelText: "Buscar",
-                hintText: "Buscar",
-                prefixIcon: Icon(Icons.search),
-                border: OutlineInputBorder(
-                  borderSide: BorderSide.none,
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(20.0),
+    return ListView(
+        padding: const EdgeInsets.only(left: 30, right: 30, bottom: 30),
+        children: [
+          Column(
+            children: <Widget>[
+              const SizedBox(
+                height: 15,
+              ),
+              Container(
+                margin: const EdgeInsets.only(
+                  top: 15,
+                  bottom: 15,
+                ),
+                child: TextField(
+                  onChanged: (value) {},
+                  decoration: const InputDecoration(
+                    fillColor: Colors.white,
+                    filled: true,
+                    labelText: "Buscar",
+                    hintText: "Buscar",
+                    prefixIcon: Icon(Icons.search),
+                    border: OutlineInputBorder(
+                      borderSide: BorderSide.none,
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(20.0),
+                      ),
+                    ),
                   ),
                 ),
               ),
-            ),
+              Column(children: [
+                _buildUserItem(),
+              ]),
+            ],
           ),
-          Column(children: [
-            ListView.builder(
-              shrinkWrap: true,
-              itemCount: 6,
-              itemBuilder: (context, index) {
-                return _buildUserItem();
-              },
-            ),
-          ]),
-        ],
-      ),
-    ]);
+        ]);
   }
 
   Widget _buildUserItem() {
-    bool isSwitched = false;
     return Container(
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20), color: Colors.white),
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.only(top: 8, bottom: 8),
       margin: const EdgeInsets.only(
-        left: 20,
-        right: 20,
         top: 8,
         bottom: 8,
       ),
@@ -139,10 +138,10 @@ class _UsersBodyState extends State<UsersBody> {
               color: Colors.blue,
             )),
         trailing: Switch(
-          value: isSwitched,
+          value: active,
           onChanged: (value) {
             setState(() {
-              isSwitched = value;
+              active = value;
             });
           },
         ),

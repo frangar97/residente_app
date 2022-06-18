@@ -89,7 +89,7 @@ class _InfoIncidetState extends State<InfoIncidet> {
           verticalDirection: VerticalDirection.down,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-             Text(
+            Text(
               incidente.titulo,
               style: headingStyle,
             ),
@@ -101,7 +101,7 @@ class _InfoIncidetState extends State<InfoIncidet> {
               height: 30,
             ),
             RichText(
-              text:  TextSpan(
+              text: TextSpan(
                 text: 'Lugar: ',
                 style: subtitle2Style,
                 children: <TextSpan>[
@@ -118,7 +118,7 @@ class _InfoIncidetState extends State<InfoIncidet> {
             Padding(
               padding: const EdgeInsets.all(20.0),
               child: RichText(
-                text:  TextSpan(
+                text: TextSpan(
                   text: 'Descripcion:',
                   style: subtitle2Style,
                   children: <TextSpan>[
@@ -142,7 +142,7 @@ class _InfoIncidetState extends State<InfoIncidet> {
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: <Widget>[
         RichText(
-          text:  TextSpan(
+          text: TextSpan(
             text: 'Fecha:',
             style: subtitle2Style,
             children: <TextSpan>[
@@ -229,13 +229,8 @@ class _InfoIncidetState extends State<InfoIncidet> {
             style: subtitleStyle,
           ),
           style: ButtonStyle(
-            padding: MaterialStateProperty.all(
-              const EdgeInsets.only(
-                left: 30,
-                right: 30,
-                top: 10,
-                bottom: 10,
-              ),
+            fixedSize: MaterialStateProperty.all(
+              const Size(140, 40),
             ),
             shape: MaterialStateProperty.all(
               RoundedRectangleBorder(
@@ -254,13 +249,8 @@ class _InfoIncidetState extends State<InfoIncidet> {
             style: textButtonStyle,
           ),
           style: ButtonStyle(
-            padding: MaterialStateProperty.all(
-              const EdgeInsets.only(
-                left: 30,
-                right: 30,
-                top: 10,
-                bottom: 10,
-              ),
+            fixedSize: MaterialStateProperty.all(
+              const Size(140, 40),
             ),
             shape: MaterialStateProperty.all(
               RoundedRectangleBorder(
