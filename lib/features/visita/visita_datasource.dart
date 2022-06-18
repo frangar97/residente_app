@@ -8,6 +8,7 @@ import 'package:residente_app/features/visita/visita_model.dart';
 
 abstract class VisitaDataSource {
   Future<List<VisitaFrecuenteModel>> getVisitasFrecuentes();
+  Future<List<VisitaEventualModel>> getVisitasEventuales();
   Future<bool> crearVisitaFrecuente(
       String nombre, String nota, int tipoVisitaId, String fecha);
   Future<List<TipoVisitaModel>> getTiposVisita();
@@ -26,9 +27,10 @@ class VisitaDataSourceImpl implements VisitaDataSource {
 
     if (request.statusCode == 200) {
       Iterable iterable = jsonDecode(request.body);
-      List<VisitaFrecuenteModel> encuestas = List<VisitaFrecuenteModel>.from(
-          iterable.map((e) => VisitaFrecuenteModel.fromJson(e)));
-      return encuestas;
+      List<VisitaFrecuenteModel> visitasFrecuntes =
+          List<VisitaFrecuenteModel>.from(
+              iterable.map((e) => VisitaFrecuenteModel.fromJson(e)));
+      return visitasFrecuntes;
     }
 
     return [];
@@ -66,5 +68,22 @@ class VisitaDataSourceImpl implements VisitaDataSource {
     }
 
     throw ServerException();
+  }
+
+  @override
+  Future<List<VisitaEventualModel>> getVisitasEventuales() async {
+    final url = Uri.http(kBaseUrl, "/api/visita-eventual");
+    final request =
+        await http.get(url, headers: {"Content-Type": "application/json"});
+
+    if (request.statusCode == 200) {
+      Iterable iterable = jsonDecode(request.body);
+      List<VisitaEventualModel> visitasEventual =
+          List<VisitaEventualModel>.from(
+              iterable.map((e) => VisitaEventualModel.fromJson(e)));
+      return visitasEventual;
+    }
+
+    return [];
   }
 }

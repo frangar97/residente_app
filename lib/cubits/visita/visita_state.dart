@@ -2,8 +2,11 @@ part of 'visita_cubit.dart';
 
 class VisitaState extends Equatable {
   final bool loadingVisitasFrecuentes;
+  final bool loadingVisitasEventuales;
   final List<VisitaFrecuenteModel> visitasFrecuentes;
+  final List<VisitaEventualModel> visitasEventuales;
   final VisitaFrecuenteModel? visitaFrecuenteSeleccionada;
+  final VisitaEventualModel? visitaEventualSeleccionada;
   final List<TipoVisitaModel> tipoVisita;
   final TipoVisitaModel? tipoVisitaSeleccionado;
   final String nombre;
@@ -20,18 +23,24 @@ class VisitaState extends Equatable {
       this.nombre = "",
       this.nota = "",
       this.formStatus = const InitialFormStatus(),
-      this.visitaFrecuenteSeleccionada});
+      this.visitaFrecuenteSeleccionada,
+      this.loadingVisitasEventuales = false,
+      this.visitaEventualSeleccionada,
+      this.visitasEventuales = const []});
 
   VisitaState copyWith(
       {List<VisitaFrecuenteModel>? visitasFrecuentes,
       List<TipoVisitaModel>? tipoVisita,
       bool? loadingVisitasFrecuentes,
+      bool? loadingVisitasEventuales,
       TipoVisitaModel? tipoVisitaSeleccionado,
       String? nombre,
       String? nota,
       String? fecha,
       FormSubmissionStatus? formStatus,
-      VisitaFrecuenteModel? visitaFrecuenteSeleccionada}) {
+      VisitaFrecuenteModel? visitaFrecuenteSeleccionada,
+      List<VisitaEventualModel>? visitasEventuales,
+      VisitaEventualModel? visitaEventualSeleccionada}) {
     return VisitaState(
         visitasFrecuentes: visitasFrecuentes ?? this.visitasFrecuentes,
         tipoVisita: tipoVisita ?? this.tipoVisita,
@@ -43,7 +52,11 @@ class VisitaState extends Equatable {
         nota: nota ?? this.nota,
         fecha: fecha ?? this.fecha,
         formStatus: formStatus ?? this.formStatus,
-        visitaFrecuenteSeleccionada: visitaFrecuenteSeleccionada);
+        visitaFrecuenteSeleccionada: visitaFrecuenteSeleccionada,
+        loadingVisitasEventuales:
+            loadingVisitasEventuales ?? this.loadingVisitasEventuales,
+        visitasEventuales: visitasEventuales ?? this.visitasEventuales,
+        visitaEventualSeleccionada: visitaEventualSeleccionada);
   }
 
   @override
@@ -56,6 +69,9 @@ class VisitaState extends Equatable {
         nota,
         fecha,
         formStatus,
-        visitaFrecuenteSeleccionada
+        visitaFrecuenteSeleccionada,
+        loadingVisitasEventuales,
+        visitasEventuales,
+        visitaEventualSeleccionada
       ];
 }

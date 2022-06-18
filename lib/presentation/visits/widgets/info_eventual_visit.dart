@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:residente_app/core/utils/style_constants.dart';
 import 'package:qr_flutter/qr_flutter.dart';
+import 'package:residente_app/cubits/visita/visita_cubit.dart';
 
 class InfoEventualVisit extends StatefulWidget {
   const InfoEventualVisit({
@@ -69,62 +71,67 @@ class _InfoEventualVisitState extends State<InfoEventualVisit> {
   }
 
   Widget _buildFrequentVisitInfoItem() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      // verticalDirection: VerticalDirection.down,
-      children: <Widget>[
-        const Center(
-          child: Text(
-            'Uber Eats',
-            style: headingStyle,
-          ),
-        ),
-        const SizedBox(
-          height: 30,
-        ),
-        RichText(
-          text: const TextSpan(
-            text: 'Tipo:',
-            style: subtitle2Style,
-            children: <TextSpan>[
-              TextSpan(
-                text: '\r Servicio a Domicilio',
-                style: subtitleStyle,
-              )
-            ],
-          ),
-        ),
-        const SizedBox(
-          height: 30,
-        ),
-        RichText(
-          text: const TextSpan(
-            text: 'Fecha/Hora Entrada:',
-            style: subtitle2Style,
-            children: <TextSpan>[
-              TextSpan(
-                text: '\r20/05/2022 - 9:00am',
-                style: subtitleStyle,
-              )
-            ],
-          ),
-        ),
-        const SizedBox(
-          height: 30,
-        ),
-        RichText(
-          text: const TextSpan(
-            text: 'Nota:',
-            style: subtitle2Style,
-            children: <TextSpan>[
-              TextSpan(
-                text: '\rAlimentos.',
-                style: subtitleStyle,
-              )
-            ],
-          ),
-        ),
-      ],
+    return BlocBuilder<VisitaCubit, VisitaState>(
+      builder: (context, state) {
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          // verticalDirection: VerticalDirection.down,
+          children: <Widget>[
+            Center(
+              child: Text(
+                state.visitaEventualSeleccionada!.nombre,
+                style: headingStyle,
+              ),
+            ),
+            const SizedBox(
+              height: 30,
+            ),
+            RichText(
+              text: TextSpan(
+                text: 'Tipo:',
+                style: subtitle2Style,
+                children: <TextSpan>[
+                  TextSpan(
+                    text:
+                        '\r ${state.visitaEventualSeleccionada!.tipoVisita.nombre}',
+                    style: subtitleStyle,
+                  )
+                ],
+              ),
+            ),
+            const SizedBox(
+              height: 30,
+            ),
+            RichText(
+              text: const TextSpan(
+                text: 'Fecha/Hora Entrada:',
+                style: subtitle2Style,
+                children: <TextSpan>[
+                  TextSpan(
+                    text: '\r20/05/2022 - 9:00am',
+                    style: subtitleStyle,
+                  )
+                ],
+              ),
+            ),
+            const SizedBox(
+              height: 30,
+            ),
+            RichText(
+              text: TextSpan(
+                text: 'Nota:',
+                style: subtitle2Style,
+                children: <TextSpan>[
+                  TextSpan(
+                    text: '\r ${state.visitaEventualSeleccionada!.notas}.',
+                    style: subtitleStyle,
+                  )
+                ],
+              ),
+            ),
+          ],
+        );
+      },
     );
   }
 
