@@ -3,6 +3,7 @@ import 'package:residente_app/features/auth/auth_datasource.dart';
 import 'package:residente_app/features/comunicado/comunicado_datasource.dart';
 import 'package:residente_app/features/encuesta/encuesta_datasource.dart';
 import 'package:residente_app/features/incidente/incidente_datasource.dart';
+import 'package:residente_app/features/reservacion/reservacion_datasource.dart';
 import 'package:residente_app/features/visita/visita_datasource.dart';
 
 void registerDataSources(GetIt sl) {
@@ -20,4 +21,7 @@ void registerDataSources(GetIt sl) {
 
   sl.registerLazySingleton<VisitaDataSource>(
       () => VisitaDataSourceImpl(client: sl()));
+
+  sl.registerLazySingleton<ReservacionDataSource>(
+      () => ReservacionDataSourceImpl(client: sl()));
 }

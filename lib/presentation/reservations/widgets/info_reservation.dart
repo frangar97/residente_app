@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:residente_app/core/utils/style_constants.dart';
+import 'package:residente_app/cubits/reservacion/reservacion_cubit.dart';
 
 class InfoReservation extends StatefulWidget {
   const InfoReservation({Key? key}) : super(key: key);
@@ -66,71 +68,78 @@ class _InfoReservationState extends State<InfoReservation> {
   }
 
   Widget _buildReservationInfoItem() {
-    return Column(
-      verticalDirection: VerticalDirection.down,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: <Widget>[
-        const Text(
-          'Calle A #100',
-          style: headingStyle,
-        ),
-        const SizedBox(
-          height: 30,
-        ),
-        _buildReservationDate(),
-        const SizedBox(
-          height: 30,
-        ),
-        RichText(
-          text: const TextSpan(
-            text: 'Lugar:',
-            style: subtitle2Style,
-            children: <TextSpan>[
-              TextSpan(
-                text: '\n\nQuiosco, Parque Calle A, Residencial Toledo',
-                style: subtitleStyle,
-              )
-            ],
-          ),
-        ),
-        const SizedBox(
-          height: 30,
-        ),
-        RichText(
-          text: const TextSpan(
-            text: 'Descripcion:',
-            style: subtitle2Style,
-            children: <TextSpan>[
-              TextSpan(
-                text:
-                    '\n\nHola, necesito reservar el quiosco del parquecito de la calle A el dia martes de la proxima semana, por dos horas, es para un kermes de mi hijo.',
-                style: subtitleStyle,
-              )
-            ],
-          ),
-        ),
-      ],
+    return BlocBuilder<ReservacionCubit, ReservacionState>(
+      builder: (context, state) {
+        return Column(
+          verticalDirection: VerticalDirection.down,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Text(
+              state.reservacionSeleccionada!.username,
+              style: headingStyle,
+            ),
+            const SizedBox(
+              height: 30,
+            ),
+            _buildReservationDate(),
+            const SizedBox(
+              height: 30,
+            ),
+            RichText(
+              text: TextSpan(
+                text: 'Lugar:',
+                style: subtitle2Style,
+                children: <TextSpan>[
+                  TextSpan(
+                    text: '\n\n${state.reservacionSeleccionada!.lugar}',
+                    style: subtitleStyle,
+                  )
+                ],
+              ),
+            ),
+            const SizedBox(
+              height: 30,
+            ),
+            RichText(
+              text: TextSpan(
+                text: 'Descripcion:',
+                style: subtitle2Style,
+                children: <TextSpan>[
+                  TextSpan(
+                    text: '\n\n${state.reservacionSeleccionada!.descripcion}.',
+                    style: subtitleStyle,
+                  )
+                ],
+              ),
+            ),
+          ],
+        );
+      },
     );
   }
 
   Widget _buildReservationDate() {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
-      children: <Widget>[
-        RichText(
-          text: const TextSpan(
-            text: 'Fecha:',
-            style: subtitle2Style,
-            children: <TextSpan>[
-              TextSpan(
-                text: '\r01/05/2022',
+    return BlocBuilder<ReservacionCubit, ReservacionState>(
+      builder: (context, state) {
+        return Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: <Widget>[
+            RichText(
+              text: TextSpan(
+                text: 'Fecha:',
                 style: subtitle2Style,
-              )
-            ],
-          ),
-        ),
-      ],
+                children: <TextSpan>[
+                  TextSpan(
+                    text: '\r${state.reservacionSeleccionada!.fecha}',
+                    style: subtitle2Style,
+                  )
+                ],
+              ),
+            ),
+          ],
+        );
+      },
     );
   }
 
