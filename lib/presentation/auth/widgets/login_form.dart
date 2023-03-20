@@ -56,6 +56,11 @@ class _LoginFormState extends State<LoginForm> {
             Navigator.pushNamedAndRemoveUntil(
                 context, "resident_menu", (route) => false);
           }
+
+          if (state.usuario!.tipoUsuarioId == 3) {
+            Navigator.pushNamedAndRemoveUntil(
+                context, "guard_menu", (route) => false);
+          }
         }
       },
       builder: (context, state) {

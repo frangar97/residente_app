@@ -7,6 +7,7 @@ import 'package:residente_app/features/visita/visita_model.dart';
 
 abstract class VisitaRepository {
   Future<List<VisitaFrecuenteModel>> getVisitasFrecuentes();
+  Future<List<VisitaEventualModel>> getVisitasEventuales();
   Future<List<TipoVisitaModel>> getTiposVisita();
   Future<Either<Failure, bool>> crearVisitaFrecuente(
       String nombre, String nota, int tipoVisitaId, String fecha);
@@ -39,5 +40,11 @@ class VisitaRepositoryImpl implements VisitaRepository {
     } on ServerException {
       return left(ServerFailure());
     }
+  }
+
+  @override
+  Future<List<VisitaEventualModel>> getVisitasEventuales() async {
+    final visitasEventuales = await dataSource.getVisitasEventuales();
+    return visitasEventuales;
   }
 }

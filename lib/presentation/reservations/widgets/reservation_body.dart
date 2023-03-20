@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:residente_app/core/utils/style_constants.dart';
+import 'package:residente_app/cubits/reservacion/reservacion_cubit.dart';
+import 'package:residente_app/features/reservacion/reservacion_model.dart';
+import 'package:residente_app/presentation/widgets/loading.dart';
 
 class ReservationBody extends StatefulWidget {
   const ReservationBody({Key? key}) : super(key: key);
@@ -58,6 +62,7 @@ class _ReservationBodyState extends State<ReservationBody> {
               size: 30,
             ),
             onPressed: () {
+              context.read<ReservacionCubit>().resetearCreacion();
               Navigator.pushNamed(context, "create_reservation");
             },
           ),
@@ -67,36 +72,48 @@ class _ReservationBodyState extends State<ReservationBody> {
   }
 
   Widget _buildBody() {
-    return ListView(children: [
-      Column(
-        children: <Widget>[
-          const SizedBox(
-            height: 30,
+    return BlocBuilder<ReservacionCubit, ReservacionState>(
+      bloc: BlocProvider.of<ReservacionCubit>(context)..cargarReservaciones(),
+      builder: (context, state) {
+        if (state.loadingReservaciones) {
+          return const Loading(mensaje: "Obteniendo Reservaciones");
+        }
+
+        return ListView(children: [
+          Column(
+            children: <Widget>[
+              const SizedBox(
+                height: 30,
+              ),
+              const Text(
+                'Reservaciones',
+                style: subtitleStyle,
+              ),
+              const SizedBox(
+                height: 15,
+              ),
+              Column(children: [
+                ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: state.listaReservaciones.length,
+                  itemBuilder: (context, index) {
+                    return _buildReservationItem(
+                        context, state.listaReservaciones[index]);
+                  },
+                ),
+              ]),
+            ],
           ),
-          const Text(
-            'Reservaciones',
-            style: subtitleStyle,
-          ),
-          const SizedBox(
-            height: 15,
-          ),
-          Column(children: [
-            ListView.builder(
-              shrinkWrap: true,
-              itemCount: 1,
-              itemBuilder: (context, index) {
-                return _buildReservationItem();
-              },
-            ),
-          ]),
-        ],
-      ),
-    ]);
+        ]);
+      },
+    );
   }
 
-  Widget _buildReservationItem() {
+  Widget _buildReservationItem(
+      BuildContext context, ReservacionModel reservacion) {
     return GestureDetector(
       onTap: () {
+        context.read<ReservacionCubit>().seleccionarReservacion(reservacion);
         Navigator.pushNamed(context, 'info_reservation');
       },
       child: Container(
@@ -116,13 +133,12 @@ class _ReservationBodyState extends State<ReservationBody> {
         child: ListTile(
             leading: const Icon(Icons.calendar_month_outlined),
             title: RichText(
-              text: const TextSpan(
-                text: 'Calle A #100',
+              text: TextSpan(
+                text: reservacion.username,
                 style: subtitleStyle,
                 children: <TextSpan>[
                   TextSpan(
-                    text:
-                        '\nHola, necesito reservar el quiosco del parquecito de la calle A el dia martes de la proxima semana, por dos horas, es para un kermes de mi hijo.',
+                    text: '\n${reservacion.descripcion}.',
                     style: subtitle2Style,
                   )
                 ],

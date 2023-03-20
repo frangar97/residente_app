@@ -18,3 +18,21 @@ class VisitaFrecuenteModel extends Equatable {
   @override
   List<Object?> get props => [nombre, notas, tipoVisita];
 }
+
+class VisitaEventualModel extends Equatable {
+  final String nombre;
+  final String notas;
+  final TipoVisitaModel tipoVisita;
+
+  const VisitaEventualModel(
+      {required this.nombre, required this.notas, required this.tipoVisita});
+
+  factory VisitaEventualModel.fromJson(Map<String, dynamic> json) =>
+      VisitaEventualModel(
+          nombre: json["nombre"],
+          notas: json["notas"],
+          tipoVisita: TipoVisitaModel.fromJson(json["tipovisita"]));
+
+  @override
+  List<Object?> get props => [nombre, notas, tipoVisita];
+}

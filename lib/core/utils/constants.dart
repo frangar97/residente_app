@@ -1,4 +1,4 @@
 const String kAppTitle = "Residentes App";
 
 //API
-const String kBaseUrl = "localhost:8000";
+const String kBaseUrl = "104.248.55.91";

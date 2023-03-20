@@ -20,6 +20,10 @@ class VisitaCubit extends Cubit<VisitaState> {
     emit(state.copyWith(visitaFrecuenteSeleccionada: visita));
   }
 
+  void seleccionarVisitaEventual(VisitaEventualModel visita) {
+    emit(state.copyWith(visitaEventualSeleccionada: visita));
+  }
+
   void onChangeNombre(String nombre) {
     emit(state.copyWith(nombre: nombre));
   }
@@ -62,6 +66,24 @@ class VisitaCubit extends Cubit<VisitaState> {
       emit(state.copyWith(
           loadingVisitasFrecuentes: false,
           visitasFrecuentes: visitasFrecuentes,
+          tipoVisita: tipos));
+    }
+  }
+
+  Future<void> cargarVisitasEventuales() async {
+    emit(state.copyWith(loadingVisitasEventuales: true));
+    final visitasEventuales = await visitaRepository.getVisitasEventuales();
+    final tipos = await visitaRepository.getTiposVisita();
+    if (tipos.isNotEmpty) {
+      emit(state.copyWith(
+          loadingVisitasEventuales: false,
+          visitasEventuales: visitasEventuales,
+          tipoVisita: tipos,
+          tipoVisitaSeleccionado: tipos[0]));
+    } else {
+      emit(state.copyWith(
+          loadingVisitasEventuales: false,
+          visitasEventuales: visitasEventuales,
           tipoVisita: tipos));
     }
   }
